@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * 注意事项：启动类所处于的包必须要包含要访问的路径所在的包
+ * version1
  * @author ZXPH
  *
  */
