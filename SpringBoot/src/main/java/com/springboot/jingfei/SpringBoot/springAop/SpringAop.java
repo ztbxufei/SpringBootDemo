@@ -44,10 +44,12 @@ public class SpringAop {
             for(Method method : methods){
                 if(method.getName().equals(methodName)){
                     SysLog sysLog = method.getDeclaredAnnotation(SysLog.class);
-                    String name = sysLog.name();
-                    String value = sysLog.value();
-                    System.out.println("name : " + name + "\tvalue: " + value);
-                    break;
+                    if(sysLog != null){
+                        String name = sysLog.name();
+                        String value = sysLog.value();
+                        System.out.println("name : " + name + "\tvalue: " + value);
+                        break;
+                    }
                 }
             }
         } catch (Throwable throwable) {
