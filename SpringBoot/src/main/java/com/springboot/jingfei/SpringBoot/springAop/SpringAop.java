@@ -21,6 +21,9 @@ import java.lang.reflect.Method;
 @Aspect
 public class SpringAop {
 
+    /**
+     * 定义切入点
+     */
     @Pointcut("execution(* com.springboot.jingfei.SpringBoot.controller.*.*(..))")
     public void SpringAopScan(){
 
