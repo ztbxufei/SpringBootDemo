@@ -1,5 +1,10 @@
 package com.springboot.jingfei.SpringBoot.utils;
 
+import org.springframework.util.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @Author xf
  * @Date Created in 17:44 2018/11/29
@@ -7,11 +12,15 @@ package com.springboot.jingfei.SpringBoot.utils;
 public class TestCommonUtil {
 
 
-      public static class ListNode {
-          int val;
-          ListNode next;
-          ListNode(int x) { val = x; }
-     }
+    public static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummyHead = new ListNode(0);
         ListNode p = l1, q = l2, curr = dummyHead;
@@ -31,25 +40,28 @@ public class TestCommonUtil {
         }
         return dummyHead.next;
     }
-    public static void main (String[] args){
-        ListNode l1 = new ListNode(0);
+
+    public static void main(String[] args) {
+        ListNode l1 = new ListNode(2);
         ListNode l = l1;
-        l.next = new ListNode(2);
-        l = l.next;
-        l.next = new ListNode(4);
+        l.next = new ListNode(5);
         l = l.next;
         l.next = new ListNode(5);
 
 
-        ListNode l2 = new ListNode(0);
+        ListNode l2 = new ListNode(5);
         ListNode s = l2;
-        s.next = new ListNode(2);
-        s = s.next;
-        s.next = new ListNode(4);
+        s.next = new ListNode(5);
         s = s.next;
         s.next = new ListNode(5);
 
-        System.out.println(addTwoNumbers(l,l2).val);
+        ListNode next = addTwoNumbers(l1, l2);
+        String str = "";
+        while(next != null){
+            str += next.val;
+            next = next.next;
+        }
+        System.out.println(new StringBuilder(str).reverse().toString());
 
     }
 }
