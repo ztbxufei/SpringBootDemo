@@ -21,7 +21,7 @@ public class HelloWorldController {
     private UserService userService;
 
 	@RequestMapping("hello")
-    @SysLog(name = "index方法", value="系统登录入口")
+    @SysLog(name = "index方法", value="系统登录入口!")
 	public String index() {
         List<User> userList = userService.getUserList();
         for (User user : userList){
