@@ -4,4 +4,19 @@
     <select id="getUserList" resultType="user">
         select id, name, sex from sys_user where rownum &lt; 10
     </select>
+
+    <insert id="insertData" parameterType="test">
+        BEGIN
+            <foreach collection="list" index="index" item="item" separator="">
+                insert into test1 (id, name, sex, name1, sex1, name2, sex2, name3, sex3, name4, sex4, name5, sex5)
+                values (test_sequence.nextval, #{item.name, jdbcType=VARCHAR}, #{item.sex, jdbcType=VARCHAR}
+                  ,#{item.name1, jdbcType=VARCHAR}, #{item.sex1, jdbcType=VARCHAR}
+                  ,#{item.name2, jdbcType=VARCHAR}, #{item.sex2, jdbcType=VARCHAR}
+                  ,#{item.name3, jdbcType=VARCHAR}, #{item.sex3, jdbcType=VARCHAR}
+                  ,#{item.name4, jdbcType=VARCHAR}, #{item.sex4, jdbcType=VARCHAR}
+                  ,#{item.name5, jdbcType=VARCHAR}, #{item.sex5, jdbcType=VARCHAR}
+                );
+            </foreach>
+        END;
+    </insert>
 </mapper>

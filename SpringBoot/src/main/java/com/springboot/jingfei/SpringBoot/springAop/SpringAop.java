@@ -1,6 +1,8 @@
 package com.springboot.jingfei.SpringBoot.springAop;
 
 import com.springboot.jingfei.SpringBoot.annotation.SysLog;
+import com.springboot.jingfei.SpringBoot.utils.StringUtils;
+import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -9,6 +11,8 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 环绕通知类加注解整合
@@ -20,6 +24,8 @@ import java.lang.reflect.Method;
 @Component
 @Aspect
 public class SpringAop {
+
+    private static final Logger logger = Logger.getLogger(SpringAop.class);
 
     /**
      * 定义切入点
@@ -40,6 +46,7 @@ public class SpringAop {
     public Object SpringAopAround(JoinPoint joinPoint){
         Object result = null;
         try {
+            logger.info("开始时间: " + StringUtils.getCurrentTime());
             result = ((ProceedingJoinPoint) joinPoint).proceed();
             Class clazz = joinPoint.getTarget().getClass();
             String methodName = joinPoint.getSignature().getName();
@@ -55,6 +62,7 @@ public class SpringAop {
                     }
                 }
             }
+            logger.info("结束时间: " + StringUtils.getCurrentTime());
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }

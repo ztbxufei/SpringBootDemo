@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.jingfei.SpringBoot.dao.ReportDao">
+    <select id="getAllReportSetting" resultType="reportSetting">
+        select * from report_setting where type = '专业版'
+    </select>
+
+    <update id="updateJsonText" parameterType="java.util.Map">
+        update report_setting set JSONTEXT = #{jsonText} where type = #{type} and userid = #{userId}
+    </update>
+</mapper>
