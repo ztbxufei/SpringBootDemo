@@ -8,7 +8,6 @@ import java.util.Map;
 
 @Mapper
 public interface ReportDao {
-    void updateReportSetting();
-    List<ReportSetting> getAllReportSetting();
+    List<ReportSetting> getAllReportSetting(Map map);
     int updateJsonText(Map map);
 }

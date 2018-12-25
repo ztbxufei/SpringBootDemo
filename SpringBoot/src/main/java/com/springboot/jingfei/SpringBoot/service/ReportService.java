@@ -2,13 +2,11 @@ package com.springboot.jingfei.SpringBoot.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.springboot.jingfei.SpringBoot.bean.ReportSetting;
 import com.springboot.jingfei.SpringBoot.dao.ReportDao;
-import org.codehaus.groovy.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.alibaba.fastjson.JSONObject;
-import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,12 +15,16 @@ import java.util.Map;
 @Component
 public class ReportService {
 
+    private static String type = "专业版";
+
     @Autowired
     private ReportDao reportDao;
 
     public void updateReportSetting(){
         // 先获取所有的专业版报表数据
-        List<ReportSetting> reportList = reportDao.getAllReportSetting();
+        Map paramMap = new HashMap();
+        paramMap.put("type", type);
+        List<ReportSetting> reportList = reportDao.getAllReportSetting(paramMap);
         for(ReportSetting report : reportList){
             JSONArray jsonArray = JSON.parseArray(report.getJsonText());
             for(Object object : jsonArray){
@@ -37,7 +39,7 @@ public class ReportService {
             Map map = new HashMap();
             map.put("userId",report.getUserId());
             map.put("jsonText", JSON.toJSONString(jsonArray));
-            map.put("type","专业版");
+            map.put("type",type);
             reportDao.updateJsonText(map);
         }
     }
