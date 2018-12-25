@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.springboot.jingfei.SpringBoot.bean.ReportSetting;
 import com.springboot.jingfei.SpringBoot.dao.ReportDao;
+import org.codehaus.groovy.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,36 +30,54 @@ public class ReportService {
                 String describe = jsonObject.getString("describe");
                 if("车辆信息".equals(describe)){
                     JSONArray titles = jsonObject.getJSONArray("titles");
-                    JSONArray paramArray = getJsonArray();
-                    titles.addAll(paramArray);
+                    getJsonArray(titles);
                     break;
                 }
             }
-            String userName = "fkzj";
             Map map = new HashMap();
-            map.put("userId",userName);
+            map.put("userId",report.getUserId());
             map.put("jsonText", JSON.toJSONString(jsonArray));
             map.put("type","专业版");
-            if(report.getUserId().equals(userName)){
-                reportDao.updateJsonText(map);
-            }
+            reportDao.updateJsonText(map);
         }
     }
 
-    private JSONArray getJsonArray(){
+    private void getJsonArray(JSONArray titles){
         Map map1 = new HashMap(); // 解压时间
         Map map2 = new HashMap(); // 解压字段
-        JSONArray jsonArray = new JSONArray();
+
+        // 判断是否含有mortgage_status，有的话就不添加
         map1.put("attr","mortgage_status");
         map1.put("selected",false);
         map1.put("title","是否解押");
-        JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(map1));
-        jsonArray.add(jsonObject);
+        boolean flag = true;
+        for(Object object : titles){
+            JSONObject jsonObject = (JSONObject) object;
+            if(jsonObject.getString("attr").equals("mortgage_status")){
+                flag = false;
+                break;
+            }
+        }
+        if(flag) {
+            JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(map1));
+            titles.add(jsonObject);
+        }
+
+        // 判断是否含有solution_mortgage_time，有的话就不添加
         map2.put("attr","solution_mortgage_time");
         map2.put("selected",false);
         map2.put("title","解押时间");
-        jsonObject = JSON.parseObject(JSON.toJSONString(map2));
-        jsonArray.add(jsonObject);
-        return jsonArray;
+        flag = true;
+        for(Object object : titles){
+            JSONObject jsonObject = (JSONObject) object;
+            if("solution_mortgage_time".equals(jsonObject.getString("attr"))){
+                flag = false;
+                break;
+            }
+        }
+        if(flag) {
+            JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(map2));
+            titles.add(jsonObject);
+        }
     }
 }
