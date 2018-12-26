@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fields type="专业版" compare="attr">
+    <Field>
+        <Attr value="mortgage_status" name="attr"></Attr>
+        <Selected value="false" name="selected"></Selected>
+        <Title value="是否解押" name="title"></Title>
+    </Field>
+    <Field>
+        <Attr value="solution_mortgage_time" name="attr"></Attr>
+        <Selected value="false" name="selected"></Selected>
+        <Title value="解押时间" name="title"></Title>
+    </Field>
+</Fields>
