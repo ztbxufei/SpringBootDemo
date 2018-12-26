@@ -17,7 +17,18 @@ public class Fields {
 
     private String compare;
 
+    private String describe;
+
     private List<Field> fields;
+
+    @XmlAttribute(name = "describe")
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
 
     @XmlAttribute(name = "compare")
     public String getCompare() {

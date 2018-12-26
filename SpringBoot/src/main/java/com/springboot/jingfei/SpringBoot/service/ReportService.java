@@ -24,6 +24,7 @@ public class ReportService {
 
     private static String type = "";
     private static String compare = "";
+    private static String describeType = "";
     private static Fields normalFields = null;
 
     @Autowired
@@ -38,6 +39,7 @@ public class ReportService {
             normalFields = fields;
             type = normalFields.getType();
             compare = normalFields.getCompare();
+            describeType = normalFields.getDescribe();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -53,7 +55,7 @@ public class ReportService {
             for (Object object : jsonArray) {
                 JSONObject jsonObject = (JSONObject) object;
                 String describe = jsonObject.getString("describe");
-                if ("车辆信息".equals(describe)) {
+                if (describeType.equals(describe)) {
                     JSONArray titles = jsonObject.getJSONArray("titles");
                     getJsonArray(titles);
                     break;
@@ -73,9 +75,8 @@ public class ReportService {
     private void getJsonArray(JSONArray titles) {
         List<Field> fieldsList = normalFields.getFields();
         List<Map> mapList = new ArrayList<>();
-        Map map = new HashMap();
         for (Field field : fieldsList) {
-            map.clear();
+            Map map = new HashMap();
             map.put(field.getAttr().getName(), field.getAttr().getValue());
             map.put(field.getSelected().getName(), field.getSelected().getValue());
             map.put(field.getTitle().getName(), field.getTitle().getValue());
