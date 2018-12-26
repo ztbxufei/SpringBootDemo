@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MessageConsumer {
-//    @JmsListener(destination = "promoteAct")
-//    @SendTo("out.queue") // 双向队列
-//    public String recieveMessage(String consumer){
-//        System.out.println(consumer+"消息已经消费了");
-//        return "return message: " + consumer;
-//    }
+    @JmsListener(destination = "promoteAct")
+    @SendTo("out.queue") // 双向队列
+    public String recieveMessage(String consumer){
+        System.out.println(consumer+"消息已经消费了");
+        return "return message: " + consumer;
+    }
 }

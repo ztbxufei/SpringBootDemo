@@ -26,13 +26,13 @@ public class MessageProducer {
      * spring boot的定时任务
      * 2s执行一次
      */
-    // @Scheduled(fixedDelay = 2000)
+    @Scheduled(fixedDelay = 2000)
     public void send(){
         jmsMessagingTemplate.convertAndSend(this.queue, "hello,queue");
     }
 
     // 接收消费者返回回来的消息
-    //@JmsListener(destination = "out.queue")
+    @JmsListener(destination = "out.queue")
     public void recieveOutMessage(String message){
         System.out.println(message);
     }
