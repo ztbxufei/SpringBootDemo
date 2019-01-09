@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.springboot.jingfei.SpringBoot.bean.ReportSetting;
 import com.springboot.jingfei.SpringBoot.bean.xml.Field;
 import com.springboot.jingfei.SpringBoot.bean.xml.Fields;
+import com.springboot.jingfei.SpringBoot.constant.Constant;
 import com.springboot.jingfei.SpringBoot.dao.ReportDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -45,7 +46,7 @@ public class ReportService {
         }
     }
 
-    public void updateReportSetting() {
+    public void updateReportSetting(String flag) {
         Map paramMap = new HashMap();
         paramMap.put("type", type);
         List<ReportSetting> reportList = reportDao.getAllReportSetting(paramMap);
@@ -57,7 +58,7 @@ public class ReportService {
                 String describe = jsonObject.getString("describe");
                 if (describeType.equals(describe)) {
                     JSONArray titles = jsonObject.getJSONArray("titles");
-                    getJsonArray(titles);
+                    getJsonArray(titles, flag);
                     break;
                 }
             }
@@ -72,11 +73,7 @@ public class ReportService {
         System.out.println("总共更新了：" + count + "行");
     }
 
-    public void deleteReportSetting(){
-
-    }
-
-    private void getJsonArray(JSONArray titles) {
+    private void getJsonArray(JSONArray titles, String flag) {
         List<Field> fieldsList = normalFields.getFields();
         List<Map> mapList = new ArrayList<>();
         for (Field field : fieldsList) {
@@ -88,30 +85,40 @@ public class ReportService {
             mapList.add(map);
         }
         for (Map subMap : mapList) {
-            titles = insertIntoArray(titles, subMap);
+            titles = insertIntoArray(titles, subMap, flag);
         }
     }
 
     // jsonObject数据格式{"name":"", "attr":"", "selected":""}
-    private JSONArray insertIntoArray(JSONArray titles, Map map) {
+    // flag 表示是更新还是删除
+    private JSONArray insertIntoArray(JSONArray titles, Map map, String delFlag) {
         boolean flag = true;
         JSONArray jsonArray = new JSONArray();
-        for (Object object : titles) {
-            JSONObject jsonObject = (JSONObject) object;
-            if (jsonObject.getString("attr").equals(map.get(compare).toString())) {
-                flag = false;
-                break;
+        if(Constant.UPDATE.equals(delFlag)) {
+            for (Object object : titles) {
+                JSONObject jsonObject = (JSONObject) object;
+                if (jsonObject.getString("attr").equals(map.get(compare).toString())) {
+                    flag = false;
+                    break;
+                }
             }
         }
         if (flag) {
             for(Object object : titles){
                 JSONObject jsonObject = (JSONObject) object;
                 // 判断是否是需要加入的字段的上一个节点，若果是先加节点后加字段
-                if(jsonObject.getString("name").equals(map.get("previous"))){
+                if(Constant.UPDATE.equals(delFlag)) {
+                    if (jsonObject.getString("name").equals(map.get("previous"))) {
+                        jsonArray.add(JSON.toJSONString(object));
+                        jsonArray.add(JSON.toJSONString(map));
+                    }
                     jsonArray.add(JSON.toJSONString(object));
-                    jsonArray.add(JSON.toJSONString(map));
+                } else if(Constant.DELETE.equals(delFlag)){
+                    if(jsonObject.getString("name").equals(map.get(compare))){
+                        jsonArray.remove(jsonObject);
+                        break;
+                    }
                 }
-                jsonArray.add(JSON.toJSONString(object));
             }
         }
         if(jsonArray != null && jsonArray.size() > 0){

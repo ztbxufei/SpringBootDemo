@@ -2,6 +2,7 @@ package com.springboot.jingfei.SpringBoot.controller;
 
 import com.springboot.jingfei.SpringBoot.annotation.SysLog;
 import com.springboot.jingfei.SpringBoot.bean.User;
+import com.springboot.jingfei.SpringBoot.constant.Constant;
 import com.springboot.jingfei.SpringBoot.service.ReportService;
 import com.springboot.jingfei.SpringBoot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class HelloWorldController {
     @SysLog(name = "index方法", value="系统登录入口")
 	public String index() {
         try {
-            reportService.updateReportSetting();
+            reportService.updateReportSetting(Constant.UPDATE);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,7 +38,7 @@ public class HelloWorldController {
     @SysLog(name = "index方法", value="系统登录入口")
     public String delete() {
         try {
-            reportService.deleteReportSetting();
+            reportService.updateReportSetting(Constant.DELETE);
         } catch (Exception e) {
             e.printStackTrace();
         }
