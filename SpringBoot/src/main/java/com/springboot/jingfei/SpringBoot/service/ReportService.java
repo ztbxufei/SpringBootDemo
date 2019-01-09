@@ -80,15 +80,18 @@ public class ReportService {
             map.put(field.getAttr().getName(), field.getAttr().getValue());
             map.put(field.getSelected().getName(), field.getSelected().getValue());
             map.put(field.getTitle().getName(), field.getTitle().getValue());
+            map.put(field.getPrevious().getName(), field.getPrevious().getValue());
             mapList.add(map);
         }
         for (Map subMap : mapList) {
-            insertIntoArray(titles, subMap);
+            titles = insertIntoArray(titles, subMap);
         }
     }
 
-    private void insertIntoArray(JSONArray titles, Map map) {
+    // jsonObject数据格式{"name":"", "attr":"", "selected":""}
+    private JSONArray insertIntoArray(JSONArray titles, Map map) {
         boolean flag = true;
+        JSONArray jsonArray = new JSONArray();
         for (Object object : titles) {
             JSONObject jsonObject = (JSONObject) object;
             if (jsonObject.getString("attr").equals(map.get(compare).toString())) {
@@ -97,8 +100,19 @@ public class ReportService {
             }
         }
         if (flag) {
-            JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(map));
-            titles.add(jsonObject);
+            for(Object object : titles){
+                JSONObject jsonObject = (JSONObject) object;
+                // 判断是否是需要加入的字段的上一个节点，若果是先加节点后加字段
+                if(jsonObject.getString("name").equals(map.get("previous"))){
+                    jsonArray.add(JSON.toJSONString(object));
+                    jsonArray.add(JSON.toJSONString(map));
+                }
+                jsonArray.add(JSON.toJSONString(object));
+            }
         }
+        if(jsonArray != null && jsonArray.size() > 0){
+            return jsonArray;
+        }
+        return titles;
     }
 }

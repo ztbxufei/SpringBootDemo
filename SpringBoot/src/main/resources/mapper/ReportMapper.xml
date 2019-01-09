@@ -8,4 +8,8 @@
     <update id="updateJsonText" parameterType="java.util.Map">
         update report_setting set JSONTEXT = #{jsonText} where type = #{type} and userid = #{userId}
     </update>
+
+    <select id="getMenuList" resultType="menu">
+        select * from menu_test order by pid
+    </select>
 </mapper>
