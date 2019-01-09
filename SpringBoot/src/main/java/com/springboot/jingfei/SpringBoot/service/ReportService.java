@@ -41,7 +41,7 @@ public class ReportService {
             type = normalFields.getType();
             compare = normalFields.getCompare();
             describeType = normalFields.getDescribe();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -73,7 +73,7 @@ public class ReportService {
         System.out.println("总共更新了：" + count + "行");
     }
 
-    private void getJsonArray(JSONArray titles, String flag) {
+    private JSONArray getJsonArray(JSONArray titles, String flag) {
         List<Field> fieldsList = normalFields.getFields();
         List<Map> mapList = new ArrayList<>();
         for (Field field : fieldsList) {
@@ -85,45 +85,48 @@ public class ReportService {
             mapList.add(map);
         }
         for (Map subMap : mapList) {
-            titles = insertIntoArray(titles, subMap, flag);
+            insertIntoArray(titles, subMap, flag);
         }
+        return titles;
     }
 
     // jsonObject数据格式{"name":"", "attr":"", "selected":""}
     // flag 表示是更新还是删除
-    private JSONArray insertIntoArray(JSONArray titles, Map map, String delFlag) {
+    private void insertIntoArray(JSONArray titles, Map map, String delFlag) {
         boolean flag = true;
         JSONArray jsonArray = new JSONArray();
-        if(Constant.UPDATE.equals(delFlag)) {
-            for (Object object : titles) {
-                JSONObject jsonObject = (JSONObject) object;
-                if (jsonObject.getString("attr").equals(map.get(compare).toString())) {
+        if (Constant.UPDATE.equals(delFlag)) {
+            for (Object object1 : titles) {
+                JSONObject jsonObject1 = (JSONObject) object1;
+                if (jsonObject1.getString("attr").equals(map.get(compare).toString())) {
                     flag = false;
                     break;
                 }
             }
         }
         if (flag) {
-            for(Object object : titles){
+            for (Object object : titles) {
                 JSONObject jsonObject = (JSONObject) object;
                 // 判断是否是需要加入的字段的上一个节点，若果是先加节点后加字段
-                if(Constant.UPDATE.equals(delFlag)) {
-                    if (jsonObject.getString("name").equals(map.get("previous"))) {
-                        jsonArray.add(JSON.toJSONString(object));
-                        jsonArray.add(JSON.toJSONString(map));
+                if (Constant.UPDATE.equals(delFlag)) {
+                    if (jsonObject.getString("title").equals(map.get("previous"))) {
+                        jsonArray.add(object);
+                        map.remove("previous");
+                        jsonArray.add(JSON.toJSON(map));
+                    } else {
+                        jsonArray.add(object);
                     }
-                    jsonArray.add(JSON.toJSONString(object));
-                } else if(Constant.DELETE.equals(delFlag)){
-                    if(jsonObject.getString("name").equals(map.get(compare))){
-                        jsonArray.remove(jsonObject);
+                } else if (Constant.DELETE.equals(delFlag)) {
+                    if (jsonObject.getString("title").equals(map.get("title"))) {
+                        titles.remove(object);
                         break;
                     }
                 }
             }
         }
-        if(jsonArray != null && jsonArray.size() > 0){
-            return jsonArray;
+        if (jsonArray != null && jsonArray.size() > 0) {
+            titles.clear();
+            titles.addAll(jsonArray);
         }
-        return titles;
     }
 }
