@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Fields type="简版" compare="attr" describe="车辆信息">
+<Fields type="简版" compare="attr" describe="审核信息">
     <Field>
-        <Attr value="mortgage_status" name="attr"></Attr>
+        <Attr value="examine_jjss_refuse" name="attr"></Attr>
         <Selected value="false" name="selected"></Selected>
-        <Title value="是否解押" name="title"></Title>
+        <Title value="初审拒绝次级子原因" name="title"></Title>
+        <Previous value="初审拒绝子原因" name="previous"></Previous>
     </Field>
     <Field>
-        <Attr value="solution_mortgage_time" name="attr"></Attr>
+        <Attr value="jud_ss_refuse" name="attr"></Attr>
         <Selected value="false" name="selected"></Selected>
-        <Title value="解押时间" name="title"></Title>
+        <Title value="终审拒绝次级子原因" name="title"></Title>
+        <Previous value="终审拒绝子原因" name="previous"></Previous>
     </Field>
 </Fields>

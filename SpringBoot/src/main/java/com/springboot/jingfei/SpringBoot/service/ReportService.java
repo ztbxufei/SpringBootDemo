@@ -72,6 +72,10 @@ public class ReportService {
         System.out.println("总共更新了：" + count + "行");
     }
 
+    public void deleteReportSetting(){
+
+    }
+
     private void getJsonArray(JSONArray titles) {
         List<Field> fieldsList = normalFields.getFields();
         List<Map> mapList = new ArrayList<>();

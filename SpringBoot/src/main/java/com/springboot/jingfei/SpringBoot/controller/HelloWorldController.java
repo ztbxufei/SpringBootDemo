@@ -22,11 +22,22 @@ public class HelloWorldController {
     @Autowired
     private ReportService reportService;
 
-	@RequestMapping("hello")
+	@RequestMapping("insert")
     @SysLog(name = "index方法", value="系统登录入口")
 	public String index() {
         try {
             reportService.updateReportSetting();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "OK";
+    }
+
+    @RequestMapping("delete")
+    @SysLog(name = "index方法", value="系统登录入口")
+    public String delete() {
+        try {
+            reportService.deleteReportSetting();
         } catch (Exception e) {
             e.printStackTrace();
         }

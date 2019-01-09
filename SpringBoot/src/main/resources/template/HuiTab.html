@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Tab页前端框架 -->
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/H-ui.js"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            // 定义tab页加载方式， 加载顺序， 作用范围
+            $.Huitab("#system .tabBar span", "#system .tabCon", "current", "click", 0);
+        });
+    </script>
+</head>
+<body>
+<div id="system">
+    <!--作用域-->
+    <div class="tabBar">
+            <span>
+                <input type="button" class="btn btn-primary-outline mr-10 fix-wh1" value="第一个按钮">
+            </span>
+        <span>
+                <input type="button" class="btn btn-primary-outline mr-10 fix-wh1" value="第二个按钮">
+            </span>
+    </div>
+    <div class="tabCon">
+        第一个div
+    </div>
+    <div class="tabCon">
+        第二个div
+    </div>
+</div>
+</body>
+</html>
