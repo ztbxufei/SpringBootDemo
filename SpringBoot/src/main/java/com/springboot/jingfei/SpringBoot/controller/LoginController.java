@@ -12,18 +12,15 @@ public class LoginController {
     @Autowired
     private MenuService menuService;
 
-    @RequestMapping("/HuiTab")
+    @RequestMapping("/huiTab")
     public ModelAndView login(){
-        ModelAndView mv = new ModelAndView("HuiTab");
+        ModelAndView mv = new ModelAndView("huiTab");
         return mv;
     }
 
-    @RequestMapping("/ZTree")
-    public ModelAndView ZTree(){
-        String json = menuService.getMenuList();
-        ModelAndView mv = new ModelAndView("ZTree");
-        mv.addObject("menuList",json);
-        mv.addObject("name","123456");
+    @RequestMapping("/index")
+    public ModelAndView index(){
+        ModelAndView mv = new ModelAndView("index");
         return mv;
     }
 }

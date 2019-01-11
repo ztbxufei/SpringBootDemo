@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Tab页前端框架 -->
+    <script type="text/javascript" src="js/jquery-1.10.2.js" th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script type="text/javascript" src="js/H-ui.js" th:src="@{/js/H-ui.js}"></script>
+    <script type="text/javascript" src="js/bootstrap-3.3.2.min.js" th:src="@{/js/bootstrap-3.3.2.min.js}"></script>
+    <link type="text/css" href="css/bootstrap-3.3.2.min.css" th:href="@{/css/bootstrap-3.3.2.min.css}" rel="stylesheet"/>
+
+    <style type="text/css">
+        #iconContain {
+
+        }
+
+        .menuList li{
+            background-color: #2e6da4;
+            font-size: 15px;
+            font-family: "Microsoft YaHei";
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <!--上面放置图标背景展示-->
+    <div id="iconContain" style="height: 3%; text-align:center">
+        这里是最新的banner
+    </div>
+    <!--中间放置正文-->
+    <div id="centerContain" style="height: 95%">
+        <!--左侧菜单栏-->
+        <div id="menuContain" class="left" style="width: 10%">
+            <ul class="menuList" style="list-style-type:none">
+                <li>
+                    <a href="">第一个链接</a>
+                </li>
+                <li>
+                    <a href="">第二个链接</a>
+                </li>
+                <li>
+                    <a href="">第三个链接</a>
+                </li>
+                <li>
+                    <a href="">第四个链接</a>
+                </li>
+            </ul>
+        </div>
+        <!--右侧内容-->
+        <div id="content" class="right"  style="width: 90%">
+
+        </div>
+    </div>
+    <!--下面放置说明-->
+    <div id="bottomContain" style="height: 2%; text-align:center">
+        版权所有 翻印必究
+    </div>
+</div>
+</body>
+</html>
