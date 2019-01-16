@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--引入css和样式-->
+    <span th:include="common/head_css :: commonOnLoadCss"></span>
+    <!--引入js-->
+    <span th:include="common/head_js :: commonOnLoadJs"></span>
+</head>
+<!--引入themeSetting-->
+<div th:include="common/theme :: themeSetting"></div>
+<!-- 引用公共菜单 -->
+<div th:include="common/menu::common"></div>
+
+
+<body class="overflow-hidden">
+    <div id="wrapper" class="preload">
+        <div id="main-container">
+            <h1>Hello World</h1>
+        </div>
+    </div>
+</body>
+<!-- 引用footer-->
+<div th:include="common/foot::footCommon"></div>
+</html>

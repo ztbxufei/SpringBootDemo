@@ -4,7 +4,16 @@ public class Menu {
     private String id;
     private String pid;
     private String name;
-    private String picture;
+    private String iconClass;
+    private String isParent;
+
+    public String getIsParent() {
+        return isParent;
+    }
+
+    public void setIsParent(String isParent) {
+        this.isParent = isParent;
+    }
 
     public String getId() {
         return id;
@@ -30,11 +39,11 @@ public class Menu {
         this.name = name;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getIconClass() {
+        return iconClass;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setIconClass(String iconClass) {
+        this.iconClass = iconClass;
     }
 }

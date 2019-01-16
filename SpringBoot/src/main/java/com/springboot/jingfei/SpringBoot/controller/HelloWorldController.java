@@ -8,6 +8,7 @@ import com.springboot.jingfei.SpringBoot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,6 +64,12 @@ public class HelloWorldController {
     @RequestMapping("bootStrapMenu")
     @SysLog(name = "bootStrapMenu方法", value="跳转bootStrapMenu页面")
     public ModelAndView bootStrapMenu(HttpServletRequest request){
+        return returnView(request);
+    }
+
+    @RequestMapping("tab")
+    @ResponseBody
+    public ModelAndView tab(HttpServletRequest request){
         return returnView(request);
     }
 

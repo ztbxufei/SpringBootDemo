@@ -318,7 +318,7 @@ var IN_GLOBAL_SCOPE = false;
       var C_KEYWORDS = [FLOW_CONTROL_KEYWORDS,"auto,case,char,const,default," + 
           "double,enum,extern,float,goto,inline,int,long,register,short,signed," +
           "sizeof,static,struct,switch,typedef,union,unsigned,void,volatile"];
-      var COMMON_KEYWORDS = [C_KEYWORDS,"catch,class,delete,false,import," +
+      var COMMON_KEYWORDS = [C_KEYWORDS,"catch,class,delete,false,common," +
           "new,operator,private,protected,public,this,throw,true,try,typeof"];
       var CPP_KEYWORDS = [COMMON_KEYWORDS,"alignof,align_union,asm,axiom,bool," +
           "concept,concept_map,const_cast,constexpr,decltype,delegate," +
@@ -326,7 +326,7 @@ var IN_GLOBAL_SCOPE = false;
           "mutable,namespace,nullptr,property,reinterpret_cast,static_assert," +
           "static_cast,template,typeid,typename,using,virtual,where"];
       var JAVA_KEYWORDS = [COMMON_KEYWORDS,
-          "abstract,assert,boolean,byte,extends,final,finally,implements,import," +
+          "abstract,assert,boolean,byte,extends,final,finally,implements,common," +
           "instanceof,interface,null,native,package,strictfp,super,synchronized," +
           "throws,transient"];
       var CSHARP_KEYWORDS = [JAVA_KEYWORDS,
@@ -342,10 +342,10 @@ var IN_GLOBAL_SCOPE = false;
           "debugger,eval,export,function,get,null,set,undefined,var,with," +
           "Infinity,NaN"];
       var PERL_KEYWORDS = "caller,delete,die,do,dump,elsif,eval,exit,foreach,for," +
-          "goto,if,import,last,local,my,next,no,our,print,package,redo,require," +
+          "goto,if,common,last,local,my,next,no,our,print,package,redo,require," +
           "sub,undef,unless,until,use,wantarray,while,BEGIN,END";
       var PYTHON_KEYWORDS = [FLOW_CONTROL_KEYWORDS, "and,as,assert,class,def,del," +
-          "elif,except,exec,finally,from,global,import,in,is,lambda," +
+          "elif,except,exec,finally,from,global,common,in,is,lambda," +
           "nonlocal,not,or,pass,print,raise,try,with,yield," +
           "False,True,None"];
       var RUBY_KEYWORDS = [FLOW_CONTROL_KEYWORDS, "alias,and,begin,case,class," +

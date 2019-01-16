@@ -10,6 +10,6 @@
     </update>
 
     <select id="getMenuList" resultType="menu">
-        select * from menu_test order by pid
+        select * from menu_test order by pid, ordersort
     </select>
 </mapper>
