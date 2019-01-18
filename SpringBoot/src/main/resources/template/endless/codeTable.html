@@ -6,32 +6,15 @@
 
     <script th:src="@{/js/jquery.dataTables.min.js}"></script>
     <script th:src="@{/js/pace.min.js}"></script>
+    <script th:src="@{/js/endless/table.js}"></script>
     <link th:href="@{/css/jquery.dataTables_themeroller.css}" rel="stylesheet">
-
-    <script type="text/javascript">
-        $(function () {
-            $('#dataTable').dataTable({
-                "bJQueryUI": true,
-                "sPaginationType": "full_numbers"
-            });
-            $('#chk-all').click(function () {
-                if ($(this).is(':checked')) {
-                    $('#responsiveTable').find('.chk-row').each(function () {
-                        $(this).prop('checked', true);
-                        $(this).parent().parent().parent().addClass('selected');
-                    });
-                }
-                else {
-                    $('#responsiveTable').find('.chk-row').each(function () {
-                        $(this).prop('checked', false);
-                        $(this).parent().parent().parent().removeClass('selected');
-                    });
-                }
-            });
-        });
-    </script>
 </head>
-
+<script type="text/javascript">
+    $(function(){
+        // 初始化表格
+        tableInit("dataTable");
+    });
+</script>
 <body class="overflow-hidden">
 <div id="wrapper" class="preload">
     <div class="padding-md">
