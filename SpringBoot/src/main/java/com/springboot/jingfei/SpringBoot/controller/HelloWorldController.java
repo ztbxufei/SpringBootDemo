@@ -21,10 +21,13 @@ import java.util.List;
  */
 
 @RestController
-public class HelloWorldController {
+public class HelloWorldController extends BaseController{
 
     @Autowired
     private ReportService reportService;
+
+    @Autowired
+    private UserService userService;
 
 	@RequestMapping("insert")
     @SysLog(name = "insert方法", value="增加报表指定配置")
@@ -67,23 +70,31 @@ public class HelloWorldController {
         return returnView(request);
     }
 
-    @RequestMapping("tab")
-    @ResponseBody
-    public ModelAndView tab(HttpServletRequest request){
-        return returnView(request);
-    }
-
     /**
-     * 纯粹的返回视图，中间不加任何渲染
-     * 前提是路径名称和视图名称一致
-     * @param request
+     * 前台分页
+      * @param request
      * @return
      */
-    private ModelAndView returnView(HttpServletRequest request){
-        String filePath = request.getServletPath();
-        filePath = filePath.substring(1, filePath.length());
-        ModelAndView modelAndView = new ModelAndView(filePath);
+    @RequestMapping("pageTable")
+    @ResponseBody
+    public ModelAndView pageTable(HttpServletRequest request){
+	    List<User> userList = userService.getAllUser();
+        ModelAndView modelAndView = returnView(request);
+        modelAndView.addObject("userList", userList);
         return modelAndView;
     }
 
+    /**
+     * 后台分页
+     * @param request
+     * @return
+     */
+    @RequestMapping("codeTable")
+    @ResponseBody
+    public ModelAndView codeTable(HttpServletRequest request){
+        List<User> userList = userService.getAllUser();
+        ModelAndView modelAndView = returnView(request);
+        modelAndView.addObject("userList", userList);
+        return modelAndView;
+    }
 }

@@ -6,6 +6,15 @@ public class Menu {
     private String name;
     private String iconClass;
     private String isParent;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getIsParent() {
         return isParent;

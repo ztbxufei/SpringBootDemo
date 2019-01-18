@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <span th:include="common/head_css :: commonOnLoadCss"></span>
+    <span th:include="common/head_js :: commonOnLoadJs"></span>
+
+    <script th:src="@{/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/js/pace.min.js}"></script>
+    <link th:href="@{/css/jquery.dataTables_themeroller.css}" rel="stylesheet">
+
+    <script type="text/javascript">
+        $(function () {
+            $('#dataTable').dataTable({
+                "bJQueryUI": true,
+                "sPaginationType": "full_numbers"
+            });
+            $('#chk-all').click(function () {
+                if ($(this).is(':checked')) {
+                    $('#responsiveTable').find('.chk-row').each(function () {
+                        $(this).prop('checked', true);
+                        $(this).parent().parent().parent().addClass('selected');
+                    });
+                }
+                else {
+                    $('#responsiveTable').find('.chk-row').each(function () {
+                        $(this).prop('checked', false);
+                        $(this).parent().parent().parent().removeClass('selected');
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+
+<body class="overflow-hidden">
+<div id="wrapper" class="preload">
+    <div class="padding-md">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel panel-default table-responsive">
+                        <div class="panel-heading">
+                           <h3>后台分页Table</h3>
+                        </div>
+                        <div class="padding-md clearfix">
+                            <table class="table table-striped" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>姓名</th>
+                                        <th>用户名</th>
+                                        <th>工号</th>
+                                        <th>电子邮箱</th>
+                                    </tr>
+                                </thead>
+                                <tr th:each="user : ${userList}">
+                                    <td th:text="${user.id}"></td>
+                                    <td th:text="${user.name}"></td>
+                                    <td th:text="${user.username}"></td>
+                                    <td th:text="${user.worknum}"></td>
+                                    <td th:text="${user.email}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

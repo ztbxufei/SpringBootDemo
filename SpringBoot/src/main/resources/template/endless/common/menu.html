@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body class="overflow-hidden">
-    <div th:fragment = "common">
+    <div id="wrapper" th:fragment = "common">
         <div id="top-nav" class="fixed skin-6">
             <a href="#" class="brand">
                 <span>Endless</span>
@@ -28,7 +28,7 @@
                         <li><a>You have 4 new unread messages</a></li>
                         <li>
                             <a class="clearfix" href="#">
-                                <img src="img/user.jpg" alt="User Avatar">
+                                <img src="/img/user.jpg" alt="User Avatar">
                                 <div class="detail">
                                     <strong>荆飞</strong>
                                     <p class="no-margin">
@@ -40,7 +40,7 @@
                         </li>
                         <li>
                             <a class="clearfix" href="#">
-                                <img src="img/user2.jpg" alt="User Avatar">
+                                <img src="/img/user2.jpg" alt="User Avatar">
                                 <div class="detail">
                                     <strong>Jane Doe</strong>
                                     <p class="no-margin">
@@ -52,7 +52,7 @@
                         </li>
                         <li>
                             <a class="clearfix" href="#">
-                                <img src="img/user.jpg" alt="User Avatar">
+                                <img src="/img/user.jpg" alt="User Avatar">
                                 <div class="detail">
                                     <strong>Bill Doe</strong>
                                     <p class="no-margin">
@@ -64,7 +64,7 @@
                         </li>
                         <li>
                             <a class="clearfix" href="#">
-                                <img src="img/user2.jpg" alt="User Avatar">
+                                <img src="/img/user2.jpg" alt="User Avatar">
                                 <div class="detail">
                                     <strong>Baby Doe</strong>
                                     <p class="no-margin">
@@ -194,7 +194,7 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a class="clearfix" href="#">
-                                <img src="img/user.jpg" alt="User Avatar">
+                                <img src="/img/user.jpg" alt="User Avatar">
                                 <div class="detail">
                                     <strong>John Doe</strong>
                                     <p class="grey">John_Doe@email.com</p>
@@ -228,7 +228,7 @@
                     </a>
                 </div>
                 <div class="user-block clearfix">
-                    <img src="img/user.jpg" alt="User Avatar">
+                    <img src="/img/user.jpg" alt="User Avatar">
                     <div class="detail">
                         <strong>John Doe</strong><span
                             class="badge badge-danger m-left-xs bounceIn animation-delay4">4</span>
@@ -253,9 +253,9 @@
                                 <span class="text" th:text="${entry.key.name}"></span>
                                 <span class="menu-hover"></span>
                             </a>
-                            <ul th:each="menu:${entry.value}" class="submenu">
-                                <li>
-                                    <a href="/tab"><span class="submenu-label" th:text="${menu.name}"></span></a>
+                            <ul class="submenu">
+                                <li th:each="menu:${entry.value}">
+                                    <a th:href="${menu.url}" target="menu_iframe"><span class="submenu-label" th:text="${menu.name}"></span></a>
                                 </li>
                             </ul>
                         </li>

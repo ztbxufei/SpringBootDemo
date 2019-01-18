@@ -10,6 +10,6 @@ import java.util.List;
 @Mapper
 @Repository
 public interface UserDao {
-    List<User> getUserList();
+    List<User> getAllUser();
     int insertData(List<Test> list);
 }

@@ -3,7 +3,6 @@ $(function	()	{
 
 	// Cookie validation
 	if(jQuery.type($.cookie('skin_color')) != 'undefined')	{
-	
 		$('aside').removeClass('skin-1');
 		$('aside').removeClass('skin-2');
 		$('aside').removeClass('skin-3');
@@ -25,7 +24,6 @@ $(function	()	{
 	$('.theme-color').click(function()	{
 		//Cookies for storing theme color
 		$.cookie('skin_color', $(this).attr('id'));
-		
 		$('aside').removeClass('skin-1');
 		$('aside').removeClass('skin-2');
 		$('aside').removeClass('skin-3');
@@ -354,7 +352,7 @@ $(window).scroll(function(){
 	
 	 //Display a scroll to top button
 	 if(position >= 200)	{
-		$('#scroll-to-top').attr('style','bottom:8px;');	
+		$('#scroll-to-top').attr('style','bottom:45px;');
 	 }
 	 else	{
 		$('#scroll-to-top').removeAttr('style');
