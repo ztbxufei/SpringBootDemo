@@ -1,12 +1,13 @@
 package com.springboot.jingfei.SpringBoot.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.springboot.jingfei.SpringBoot.annotation.SysLog;
 import com.springboot.jingfei.SpringBoot.bean.User;
-import com.springboot.jingfei.SpringBoot.constant.Constant;
+import com.springboot.jingfei.SpringBoot.framework.controller.BaseController;
 import com.springboot.jingfei.SpringBoot.service.ReportService;
 import com.springboot.jingfei.SpringBoot.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * RestController注解返回json字符串
@@ -21,7 +23,9 @@ import java.util.List;
  */
 
 @RestController
-public class HelloWorldController extends BaseController{
+public class HelloWorldController extends BaseController {
+
+    Logger logger = Logger.getLogger(HelloWorldController.class);
 
     @Autowired
     private ReportService reportService;
@@ -78,9 +82,14 @@ public class HelloWorldController extends BaseController{
     @RequestMapping("pageTable")
     @ResponseBody
     public ModelAndView pageTable(HttpServletRequest request){
-	    List<User> userList = userService.getAllUser();
         ModelAndView modelAndView = returnView(request);
-        modelAndView.addObject("userList", userList);
+        Map paramMap = getParameterMap(request);
+        try {
+            List<User> userList = userService.getAllUser(paramMap);
+            modelAndView.addObject("userList", userList);
+        } catch (Exception e){
+            logger.error("前台分页失败" + e.getMessage());
+        }
         return modelAndView;
     }
 
@@ -92,9 +101,27 @@ public class HelloWorldController extends BaseController{
     @RequestMapping("codeTable")
     @ResponseBody
     public ModelAndView codeTable(HttpServletRequest request){
-        List<User> userList = userService.getAllUser();
+        Map map = getParameterMap(request);
         ModelAndView modelAndView = returnView(request);
-        modelAndView.addObject("userList", userList);
+        try {
+            List<User> userList = userService.getAllUser(map);
+            modelAndView.addObject("userList", userList);
+        } catch (Exception e){
+            logger.error("后台分页失败: " + e.getMessage());
+        }
         return modelAndView;
+    }
+
+    @RequestMapping("codeTable1")
+    public String codeTable1(HttpServletRequest request){
+        Map paramMap = getParameterMap(request);
+        try {
+            List<User> userList = userService.getAllUser(paramMap);
+            System.out.println(JSON.toJSONString(userList));
+            return JSON.toJSONString(userList);
+        } catch (Exception e){
+            logger.error("后台分页失败: " + e.getMessage());
+        }
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package com.springboot.jingfei.SpringBoot.controller;
 
 import com.springboot.jingfei.SpringBoot.bean.Menu;
+import com.springboot.jingfei.SpringBoot.framework.controller.BaseController;
 import com.springboot.jingfei.SpringBoot.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class LoginController extends BaseController{
+public class LoginController extends BaseController {
 
     @Autowired
     private MenuService menuService;
