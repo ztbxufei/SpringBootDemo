@@ -85,7 +85,7 @@ public class HelloWorldController extends BaseController {
         ModelAndView modelAndView = returnView(request);
         Map paramMap = getParameterMap(request);
         try {
-            List<User> userList = userService.getAllUser(paramMap);
+            Map userList = userService.getAllUser(paramMap);
             modelAndView.addObject("userList", userList);
         } catch (Exception e){
             logger.error("前台分页失败" + e.getMessage());
@@ -104,7 +104,7 @@ public class HelloWorldController extends BaseController {
         Map map = getParameterMap(request);
         ModelAndView modelAndView = returnView(request);
         try {
-            List<User> userList = userService.getAllUser(map);
+            Map userList = userService.getAllUser(map);
             modelAndView.addObject("userList", userList);
         } catch (Exception e){
             logger.error("后台分页失败: " + e.getMessage());
@@ -116,9 +116,8 @@ public class HelloWorldController extends BaseController {
     public String codeTable1(HttpServletRequest request){
         Map paramMap = getParameterMap(request);
         try {
-            List<User> userList = userService.getAllUser(paramMap);
-            System.out.println(JSON.toJSONString(userList));
-            return JSON.toJSONString(userList);
+            Map resultMap = userService.getAllUser(paramMap);
+            return JSON.toJSONString(resultMap);
         } catch (Exception e){
             logger.error("后台分页失败: " + e.getMessage());
         }

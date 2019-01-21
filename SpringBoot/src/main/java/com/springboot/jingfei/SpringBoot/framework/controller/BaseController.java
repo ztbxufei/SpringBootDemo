@@ -1,11 +1,12 @@
 package com.springboot.jingfei.SpringBoot.framework.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class BaseController {
     /**
@@ -27,13 +28,21 @@ public class BaseController {
     }
 
     public Map getParameterMap(HttpServletRequest request){
-        Map paramMap = new HashMap();
+        Map map = new HashMap();
         Enumeration enu=request.getParameterNames();
         while(enu.hasMoreElements()){
-            String key = enu.nextElement().toString();
-            paramMap.put(key, request.getParameter(key));
+            String paraName=(String)enu.nextElement();
+            if(paraName.equals("aoData")){
+                Map mapEntry = request.getParameterMap();
+                String mapList = ((String[]) mapEntry.get(paraName))[0];
+                JSONArray jsonArray = JSON.parseArray(mapList);
+                for(Object object : jsonArray){
+                    JSONObject jsonObject = (JSONObject) object;
+                    map.put(jsonObject.getString("name"), jsonObject.getString("value"));
+                }
+            }
+            map.put(paraName, request.getParameter(paraName));
         }
-        return paramMap;
+        return map;
     }
-
 }

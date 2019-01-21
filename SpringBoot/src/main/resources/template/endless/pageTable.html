@@ -10,47 +10,52 @@
     <link th:href="@{/css/jquery.dataTables_themeroller.css}" rel="stylesheet">
 </head>
 <script type="text/javascript">
-    $(function(){
+    $(function () {
         // 初始化表格样式和风格
-        dataTableInit("dataTable");
+        var url = "codeTable1";
+        var param = {"start": 1, "end": 2};
+        clientDataTableInit("dataTable", url, param, aoColumns());
     });
+
+    function aoColumns() {
+        return [
+            {"mDataProp": "id"},
+            {"mDataProp": "name"},
+            {"mDataProp": "username"},
+            {"mDataProp": "worknum"},
+            {"mDataProp": "email", "bSortable": false} //不允许当前页排序
+        ];
+    }
 </script>
 <body class="overflow-hidden">
-    <div id="wrapper" class="preload">
-        <div class="padding-md">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel panel-default table-responsive">
-                            <div class="panel-heading">
-                               <h3>前台分页Table</h3>
-                            </div>
-                            <div class="padding-md clearfix">
-                                <table class="table table-striped" id="dataTable">
-                                    <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>姓名</th>
-                                        <th>用户名</th>
-                                        <th>工号</th>
-                                        <th>电子邮箱</th>
-                                    </tr>
-                                    </thead>
-                                    <tr th:each="user : ${userList}">
-                                        <td th:text="${user.id}"></td>
-                                        <td th:text="${user.name}"></td>
-                                        <td th:text="${user.username}"></td>
-                                        <td th:text="${user.worknum}"></td>
-                                        <td th:text="${user.email}"></td>
-                                    </tr>
-                                </table>
-                            </div>
+<div id="wrapper" class="preload">
+    <div class="padding-md">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel panel-default table-responsive">
+                        <div class="panel-heading">
+                            <h3>前台分页Table</h3>
+                        </div>
+                        <div class="padding-md clearfix">
+                            <table class="table table-striped" id="dataTable">
+                                <thead>
+                                <tr style="height: max-content">
+                                    <th>Id</th>
+                                    <th>姓名</th>
+                                    <th>用户名</th>
+                                    <th>工号</th>
+                                    <th>电子邮箱</th>
+                                </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <a href="#" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
             </div>
+            <a href="#" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
         </div>
     </div>
+</div>
 </body>
 </html>

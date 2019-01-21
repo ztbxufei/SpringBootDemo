@@ -11,9 +11,20 @@
 </head>
 <script type="text/javascript">
     $(function(){
-        // 初始化表格, 后台加载
-        dataTableInit("dataTable");
+        var url = "codeTable1";
+        var param = {"start": 1, "end": 2};
+        serverDataTableInit("dataTable", url, param, aoColumns());
     });
+
+    function aoColumns() {
+        return [
+            {"mDataProp": "id"},
+            {"mDataProp": "name"},
+            {"mDataProp": "username"},
+            {"mDataProp": "worknum"},
+            {"mDataProp": "email", "bSortable": false} //不允许当前页排序
+        ];
+    }
 </script>
 <body class="overflow-hidden">
 <div id="wrapper" class="preload">
@@ -36,13 +47,6 @@
                                         <th>电子邮箱</th>
                                     </tr>
                                 </thead>
-                                <tr th:each="user : ${userList}">
-                                    <td th:text="${user.id}"></td>
-                                    <td th:text="${user.name}"></td>
-                                    <td th:text="${user.username}"></td>
-                                    <td th:text="${user.worknum}"></td>
-                                    <td th:text="${user.email}"></td>
-                                </tr>
                             </table>
                         </div>
                     </div>
