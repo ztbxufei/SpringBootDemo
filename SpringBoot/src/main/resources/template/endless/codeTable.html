@@ -8,22 +8,31 @@
     <script th:src="@{/js/pace.min.js}"></script>
     <script th:src="@{/js/endless/table.js}"></script>
     <link th:href="@{/css/jquery.dataTables_themeroller.css}" rel="stylesheet">
+    <link th:href="@{/css/mine.css}" rel="stylesheet">
 </head>
 <script type="text/javascript">
+    var serverDataTable = null;
     $(function(){
-        var url = "codeTable1";
-        var param = {"start": 1, "end": 2};
-        serverDataTableInit("dataTable", url, param, aoColumns());
+        serverDataTableInit("dataTable", "codeTable1", {}, aoColumns());
     });
 
     function aoColumns() {
         return [
-            {"mDataProp": "id"},
-            {"mDataProp": "name"},
-            {"mDataProp": "username"},
-            {"mDataProp": "worknum"},
+            {"mDataProp": "id", "bSortable": false},
+            {"mDataProp": "name", "bSortable": false},
+            {"mDataProp": "username", "bSortable": false},
+            {"mDataProp": "worknum", "bSortable": false},
             {"mDataProp": "email", "bSortable": false} //不允许当前页排序
         ];
+    }
+
+    function searchData(){
+        if(serverDataTable == null){
+            var param = $("#formToggleLine").serialize();
+            serverDataTable = serverDataTableInit("dataTable", "codeTable1", param, aoColumns());
+        } else {
+            $("#dataTable").dataTable().fnDraw(false);
+        }
     }
 </script>
 <body class="overflow-hidden">
@@ -37,10 +46,18 @@
                             <h3>后台分页Table</h3>
                         </div>
                         <div class="padding-md clearfix">
-                            <table class="table table-striped" id="dataTable">
+                            <form id="formToggleLine">
+                                <div>
+                                    <input type="text" class="mineForm-control input-sm" placeholder="姓名" id="name" aria-controls="dataTable">
+                                    <input type="text" class="mineForm-control input-sm" placeholder="工号" id="worknum" aria-controls="dataTable">
+                                    <input type="text" class="mineForm-control input-sm" placeholder="邮箱" id="email" aria-controls="dataTable">
+                                    <button class="btn btn-default btn-sm" type="button" onclick="searchData()"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+                            <table class="table table-bordered table-condensed table-hover table-striped" id="dataTable">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        <th class="col-md-3">Id</th>
                                         <th>姓名</th>
                                         <th>用户名</th>
                                         <th>工号</th>

@@ -8,6 +8,7 @@
     <script th:src="@{/js/pace.min.js}"></script>
     <script th:src="@{/js/endless/table.js}"></script>
     <link th:href="@{/css/jquery.dataTables_themeroller.css}" rel="stylesheet">
+    <link th:href="@{/css/mine.css}" rel="stylesheet">
 </head>
 <script type="text/javascript">
     $(function () {
@@ -19,10 +20,10 @@
 
     function aoColumns() {
         return [
-            {"mDataProp": "id"},
-            {"mDataProp": "name"},
-            {"mDataProp": "username"},
-            {"mDataProp": "worknum"},
+            {"mDataProp": "id", "bSortable": false},
+            {"mDataProp": "name", "bSortable": false},
+            {"mDataProp": "username", "bSortable": false},
+            {"mDataProp": "worknum", "bSortable": false},
             {"mDataProp": "email", "bSortable": false} //不允许当前页排序
         ];
     }
@@ -38,10 +39,10 @@
                             <h3>前台分页Table</h3>
                         </div>
                         <div class="padding-md clearfix">
-                            <table class="table table-striped" id="dataTable">
+                            <table class="table table-bordered table-condensed table-hover table-striped" id="dataTable">
                                 <thead>
-                                <tr style="height: max-content">
-                                    <th>Id</th>
+                                <tr>
+                                    <th class="col-md-3">Id</th>
                                     <th>姓名</th>
                                     <th>用户名</th>
                                     <th>工号</th>

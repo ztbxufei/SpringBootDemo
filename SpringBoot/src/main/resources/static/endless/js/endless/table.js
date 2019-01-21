@@ -8,7 +8,7 @@ function serverDataTableInit(id, url, param, aoColumns) { // param 为json对象
         //"aLengthMenu": [10, 25, 30, "All"], // 定义每页显示数据量
         "bServerSide": true,
         "bRetrieve": true,
-        "bSort":false,
+        "bSort":true,
         "iDisplayLength": 10,
         "sServerMethod": "POST",
         "sAjaxSource": url,
