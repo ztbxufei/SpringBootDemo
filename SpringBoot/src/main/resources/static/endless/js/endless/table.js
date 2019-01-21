@@ -1,5 +1,9 @@
+var dataTable;
 function serverDataTableInit(id, url, param, aoColumns) { // param 为json对象
-    var dataTable = $('#' + id).dataTable({
+    if(dataTable != undefined){
+        dataTable.fnDestroy();
+    }
+    dataTable = $('#' + id).dataTable({
         "bFilter": false,
         "bJQueryUI": true,
         "bPaginate": true,
@@ -62,11 +66,14 @@ function serverDataTableInit(id, url, param, aoColumns) { // param 为json对象
 
 
 function clientDataTableInit(id, url, param, aoColumns){
-    var dataTable = $('#' + id).dataTable({
+    if(dataTable != undefined){
+        dataTable.fnDestroy();
+    }
+    dataTable = $('#' + id).dataTable({
         "bFilter": true,
         "bJQueryUI": true,
         "bPaginate": true,
-        "bLengthChange": false, //改变每页显示数据数量
+        "bLengthChange": true, //改变每页显示数据数量
         "sPaginationType": "full_numbers",
         "bServerSide": false,
         //"bRetrieve": true,
@@ -122,3 +129,18 @@ function clientDataTableInit(id, url, param, aoColumns){
     return dataTable;
 }
 
+$.fn.serializeObject = function() {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};

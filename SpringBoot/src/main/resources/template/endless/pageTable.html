@@ -12,20 +12,23 @@
 </head>
 <script type="text/javascript">
     $(function () {
-        // 初始化表格样式和风格
-        var url = "codeTable1";
-        var param = {"start": 1, "end": 2};
-        clientDataTableInit("dataTable", url, param, aoColumns());
+        // 初始化查询
+        searchData();
     });
 
-    function aoColumns() {
-        return [
-            {"mDataProp": "id", "bSortable": false},
-            {"mDataProp": "name", "bSortable": false},
-            {"mDataProp": "username", "bSortable": false},
-            {"mDataProp": "worknum", "bSortable": false},
-            {"mDataProp": "email", "bSortable": false} //不允许当前页排序
-        ];
+    // 定义表格的列
+    var aoColumns = [
+        {"mDataProp": "id", "bSortable": false},
+        {"mDataProp": "name", "bSortable": false},
+        {"mDataProp": "username", "bSortable": false},
+        {"mDataProp": "worknum", "bSortable": false},
+        {"mDataProp": "email", "bSortable": false} //不允许当前页排序
+    ];
+
+    // 查询事件
+    function searchData(){
+        var param = $("#formToggleLine").serializeObject();
+        clientDataTableInit("dataTable", "codeTable1", param, aoColumns);
     }
 </script>
 <body class="overflow-hidden">

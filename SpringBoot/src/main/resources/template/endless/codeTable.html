@@ -11,28 +11,25 @@
     <link th:href="@{/css/mine.css}" rel="stylesheet">
 </head>
 <script type="text/javascript">
-    var serverDataTable = null;
     $(function(){
-        serverDataTableInit("dataTable", "codeTable1", {}, aoColumns());
+        // 初始化查询
+        searchData();
     });
 
-    function aoColumns() {
-        return [
-            {"mDataProp": "id", "bSortable": false},
-            {"mDataProp": "name", "bSortable": false},
-            {"mDataProp": "username", "bSortable": false},
-            {"mDataProp": "worknum", "bSortable": false},
-            {"mDataProp": "email", "bSortable": false} //不允许当前页排序
-        ];
-    }
+    // 表格对应的列
+    var aoColumns =
+    [
+        {"mDataProp": "id", "bSortable": false},
+        {"mDataProp": "name", "bSortable": false},
+        {"mDataProp": "username", "bSortable": false},
+        {"mDataProp": "worknum", "bSortable": false},
+        {"mDataProp": "email", "bSortable": false} //不允许当前页排序
+    ];
 
+    // 查询事件
     function searchData(){
-        if(serverDataTable == null){
-            var param = $("#formToggleLine").serialize();
-            serverDataTable = serverDataTableInit("dataTable", "codeTable1", param, aoColumns());
-        } else {
-            $("#dataTable").dataTable().fnDraw(false);
-        }
+        var param = $("#formToggleLine").serializeObject();
+        serverDataTableInit("dataTable", "codeTable1", param, aoColumns);
     }
 </script>
 <body class="overflow-hidden">
@@ -47,12 +44,17 @@
                         </div>
                         <div class="padding-md clearfix">
                             <form id="formToggleLine">
-                                <div>
-                                    <input type="text" class="mineForm-control input-sm" placeholder="姓名" id="name" aria-controls="dataTable">
-                                    <input type="text" class="mineForm-control input-sm" placeholder="工号" id="worknum" aria-controls="dataTable">
-                                    <input type="text" class="mineForm-control input-sm" placeholder="邮箱" id="email" aria-controls="dataTable">
-                                    <button class="btn btn-default btn-sm" type="button" onclick="searchData()"><i class="fa fa-search"></i></button>
-                                </div>
+                                <input type="text" class="mineForm-control input-sm" placeholder="姓名" id="name" name="name" aria-controls="dataTable">
+                                <input type="text" class="mineForm-control input-sm" placeholder="工号" id="worknum" name="worknum" aria-controls="dataTable">
+                                <input type="text" class="mineForm-control input-sm" placeholder="邮箱" id="email" name="email" aria-controls="dataTable">
+                                <label>label: </label>
+                                <select class="mineForm-control input-sm" style="width:100px;" name="dataTable_length" aria-controls="dataTable">
+                                    <option value="10" selected="selected">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                <button class="btn btn-default btn-sm" data-toggle="tooltip" title="查询" type="button" onclick="searchData()"><i class="fa fa-search"></i></button>
                             </form>
                             <table class="table table-bordered table-condensed table-hover table-striped" id="dataTable">
                                 <thead>
