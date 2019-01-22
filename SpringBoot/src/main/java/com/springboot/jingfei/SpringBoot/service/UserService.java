@@ -1,7 +1,6 @@
 package com.springboot.jingfei.SpringBoot.service;
 
 import com.springboot.jingfei.SpringBoot.bean.DBCommonEntity;
-import com.springboot.jingfei.SpringBoot.bean.User;
 import com.springboot.jingfei.SpringBoot.dao.UserDao;
 import com.springboot.jingfei.SpringBoot.framework.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -19,6 +19,6 @@
     </insert>
 
     <delete id="delete" parameterType="java.util.Map">
-        delete ${tableName} where ${primaryKey} = #{primaryValue}
+        delete from ${tableName} where ${primaryKey} = #{primaryValue}
     </delete>
 </mapper>
