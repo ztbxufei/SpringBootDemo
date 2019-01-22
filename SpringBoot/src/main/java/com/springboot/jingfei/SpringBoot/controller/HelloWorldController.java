@@ -2,6 +2,7 @@ package com.springboot.jingfei.SpringBoot.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.springboot.jingfei.SpringBoot.annotation.SysLog;
+import com.springboot.jingfei.SpringBoot.bean.Select;
 import com.springboot.jingfei.SpringBoot.bean.User;
 import com.springboot.jingfei.SpringBoot.framework.controller.BaseController;
 import com.springboot.jingfei.SpringBoot.service.ReportService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -104,8 +106,14 @@ public class HelloWorldController extends BaseController {
         Map map = getParameterMap(request);
         ModelAndView modelAndView = returnView(request);
         try {
+            List<Select> selectList = new ArrayList();
+            selectList.add(new Select("10","10"));
+            selectList.add(new Select("20","20"));
+            selectList.add(new Select("30","30"));
+            selectList.add(new Select("40","40"));
             Map userList = userService.getAllUser(map);
             modelAndView.addObject("userList", userList);
+            modelAndView.addObject("selectList", JSON.toJSONString(selectList));
         } catch (Exception e){
             logger.error("后台分页失败: " + e.getMessage());
         }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.jingfei.SpringBoot.dao.DBCommonDao">
+    <insert id="insert" parameterType="java.util.Map">
+        insert into ${tableName} (
+        <foreach collection="database" index="key" item="val" separator=",">
+            <if test="val != null">
+                ${key}
+            </if>
+        </foreach>
+        )
+        values(
+        <foreach collection="database" index="key" item="val" separator=",">
+            <if test="val != null">
+                #{val}
+            </if>
+        </foreach>
+        )
+    </insert>
+
+    <delete id="delete" parameterType="java.util.Map">
+        delete ${tableName} where ${primaryKey} = #{primaryValue}
+    </delete>
+</mapper>

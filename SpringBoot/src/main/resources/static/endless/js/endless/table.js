@@ -1,3 +1,6 @@
+// 引入外部js
+// document.write("<script language=javascript src='@{/js/endless/mine.js}’></script>");
+
 var dataTable;
 function serverDataTableInit(id, url, param, aoColumns) { // param 为json对象
     if(dataTable != undefined){
@@ -43,7 +46,7 @@ function serverDataTableInit(id, url, param, aoColumns) { // param 为json对象
             "sInfo": "从 _START_ 到 _END_ /共 _MAX_ 条数据",
             "sInfoFiltered" : "",
             "sInfoEmpty": "没有数据",
-            "oPaginate":{'sNext':'下页','sPrevious':'下页','sFirst':'第一页','sLast':'最后一页'},
+            "oPaginate":{'sNext':'下页','sPrevious':'上页','sFirst':'第一页','sLast':'最后一页'},
             "sZeroRecords": "没有检索到数据",
         },
     });
@@ -108,7 +111,7 @@ function clientDataTableInit(id, url, param, aoColumns){
             "sInfo": "从 _START_ 到 _END_ /共 _MAX_ 条数据",
             "sInfoFiltered" : "",
             "sInfoEmpty": "没有数据",
-            "oPaginate":{'sNext':'下页','sPrevious':'下页','sFirst':'第一页','sLast':'最后一页'},
+            "oPaginate":{'sNext':'下页','sPrevious':'上页','sFirst':'第一页','sLast':'最后一页'},
             "sZeroRecords": "没有检索到数据",
         },
     });

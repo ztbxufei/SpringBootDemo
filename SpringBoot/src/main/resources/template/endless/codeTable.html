@@ -7,6 +7,7 @@
     <script th:src="@{/js/jquery.dataTables.min.js}"></script>
     <script th:src="@{/js/pace.min.js}"></script>
     <script th:src="@{/js/endless/table.js}"></script>
+    <script th:src="@{/js/endless/mine.js}"></script>
     <link th:href="@{/css/jquery.dataTables_themeroller.css}" rel="stylesheet">
     <link th:href="@{/css/mine.css}" rel="stylesheet">
 </head>
@@ -48,11 +49,7 @@
                                 <input type="text" class="mineForm-control input-sm" placeholder="工号" id="worknum" name="worknum" aria-controls="dataTable">
                                 <input type="text" class="mineForm-control input-sm" placeholder="邮箱" id="email" name="email" aria-controls="dataTable">
                                 <label>label: </label>
-                                <select class="mineForm-control input-sm" style="width:100px;" name="dataTable_length" aria-controls="dataTable">
-                                    <option value="10" selected="selected">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
+                                <select class="mineForm-control input-sm" style="width:100px;" name="dataTable_length" aria-controls="dataTable" th:value="${selectList}">
                                 </select>
                                 <button class="btn btn-default btn-sm" data-toggle="tooltip" title="查询" type="button" onclick="searchData()"><i class="fa fa-search"></i></button>
                             </form>

@@ -13,7 +13,7 @@
         <!-- com.github.pagehelper为PageHelper类所在包名 -->
         <plugin interceptor="com.github.pagehelper.PageHelper">
             <!-- 设置数据库类型Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
-            <property name="dialect" value="Oracle"/>
+            <property name="dialect" value="Mysql"/>
         </plugin>
     </plugins>
 </configuration>
