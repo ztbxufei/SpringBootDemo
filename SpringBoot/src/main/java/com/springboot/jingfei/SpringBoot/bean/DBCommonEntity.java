@@ -6,6 +6,15 @@ public class DBCommonEntity {
     private Object primaryValue;
     private Object entity;
     private String tableName;
+    private Class clazz;
+
+    public Class getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Class clazz) {
+        this.clazz = clazz;
+    }
 
     public Object getPrimaryValue() {
         return primaryValue;
@@ -45,6 +54,11 @@ public class DBCommonEntity {
 
         public DBCommonBuilder setPrimaryKey(String board) {
             entity.setPrimaryKey(board);
+            return this;
+        }
+
+        public DBCommonBuilder setClazz(Class clazz) {
+            entity.setClazz(clazz);
             return this;
         }
 

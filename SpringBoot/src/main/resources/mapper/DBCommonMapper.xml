@@ -21,4 +21,8 @@
     <delete id="delete" parameterType="java.util.Map">
         delete from ${tableName} where ${primaryKey} = #{primaryValue}
     </delete>
+
+    <select id="selectList" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from ${tableName} where ${primaryKey} = #{primaryValue}
+    </select>
 </mapper>
