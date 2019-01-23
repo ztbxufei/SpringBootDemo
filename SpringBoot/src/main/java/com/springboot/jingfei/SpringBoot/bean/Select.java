@@ -2,19 +2,23 @@ package com.springboot.jingfei.SpringBoot.bean;
 
 public class Select {
 
-    private String code;
+    private Integer code;
     private String text;
 
-    public Select(String code, String text){
+    public Select(){
+
+    }
+
+    public Select(Integer code, String text){
         this.code = code;
         this.text = text;
     }
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 

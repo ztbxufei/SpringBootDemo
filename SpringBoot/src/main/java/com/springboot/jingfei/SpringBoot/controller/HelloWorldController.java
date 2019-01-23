@@ -3,7 +3,6 @@ package com.springboot.jingfei.SpringBoot.controller;
 import com.alibaba.fastjson.JSON;
 import com.springboot.jingfei.SpringBoot.annotation.SysLog;
 import com.springboot.jingfei.SpringBoot.bean.Select;
-import com.springboot.jingfei.SpringBoot.bean.User;
 import com.springboot.jingfei.SpringBoot.framework.controller.BaseController;
 import com.springboot.jingfei.SpringBoot.service.ReportService;
 import com.springboot.jingfei.SpringBoot.service.UserService;
@@ -103,16 +102,9 @@ public class HelloWorldController extends BaseController {
     @RequestMapping("codeTable")
     @ResponseBody
     public ModelAndView codeTable(HttpServletRequest request){
-        Map map = getParameterMap(request);
         ModelAndView modelAndView = returnView(request);
         try {
-            List<Select> selectList = new ArrayList();
-            selectList.add(new Select("10","10"));
-            selectList.add(new Select("20","20"));
-            selectList.add(new Select("30","30"));
-            selectList.add(new Select("40","40"));
-            Map userList = userService.getAllUser(map);
-            modelAndView.addObject("userList", userList);
+            List<Select> selectList = userService.getSelectCodeList();
             modelAndView.addObject("selectList", JSON.toJSONString(selectList));
         } catch (Exception e){
             logger.error("后台分页失败: " + e.getMessage());
@@ -120,6 +112,12 @@ public class HelloWorldController extends BaseController {
         return modelAndView;
     }
 
+
+    /**
+     * 获取所有用户
+     * @param request
+     * @return
+     */
     @RequestMapping("codeTable1")
     public String codeTable1(HttpServletRequest request){
         Map paramMap = getParameterMap(request);

@@ -1,10 +1,9 @@
 package com.springboot.jingfei.SpringBoot.service;
 
-import com.springboot.jingfei.SpringBoot.bean.DBCommonEntity;
-import com.springboot.jingfei.SpringBoot.bean.User;
+import com.springboot.jingfei.SpringBoot.bean.DataBaseEntity;
+import com.springboot.jingfei.SpringBoot.bean.Select;
 import com.springboot.jingfei.SpringBoot.dao.UserDao;
 import com.springboot.jingfei.SpringBoot.framework.service.BaseService;
-import com.springboot.jingfei.SpringBoot.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,16 +16,15 @@ public class UserService extends BaseService {
     private UserDao userDao;
 
     @Autowired
-    private DBCommonService dbCommonService;
+    private DataBaseService dataBaseService;
 
     public Map getAllUser(Map paraMap) throws Exception {
-        DBCommonEntity dbCommonEntity = DBCommonEntity.builder().setTableName("sys_user").setPrimaryKey("id").setPrimaryValue(75).create();
-        dbCommonService.delete(dbCommonEntity);
-        dbCommonEntity = DBCommonEntity.builder().setTableName("sys_user").setPrimaryKey("name").setPrimaryValue("张三").setClazz(User.class).create();
-        List<User> userList = dbCommonService.select(dbCommonEntity);
-        for(User user : userList){
-            System.out.println(StringUtils.convertObjToMap(user));
-        }
         return queryDataByPage(UserDao.class, this.userDao, "getAllUser", paraMap);
+    }
+
+    public List<Select> getSelectCodeList(){
+        DataBaseEntity dataBaseEntity = DataBaseEntity.builder().setTableName("sys_code").setPrimaryKey("childmsg").setPrimaryValue("sys_dinct").create();
+        List<Select> selectList = dataBaseService.selectList(dataBaseEntity, Select.class);
+        return selectList;
     }
 }
