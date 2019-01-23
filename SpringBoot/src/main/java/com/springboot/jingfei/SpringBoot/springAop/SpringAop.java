@@ -5,14 +5,14 @@ import com.springboot.jingfei.SpringBoot.utils.StringUtils;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * 环绕通知类加注解整合
@@ -44,12 +44,18 @@ public class SpringAop {
      */
     @Around("SpringAopScan()")
     public Object SpringAopAround(JoinPoint joinPoint){
+        String methodName = "";
+        String className = "";
+        Signature signature = joinPoint.getSignature();
+        Class clazz = joinPoint.getTarget().getClass();
+        if(signature instanceof MethodSignature){
+            methodName = ((MethodSignature) signature).getMethod().getName();
+            className = clazz.getSimpleName();
+        }
         Object result = null;
         try {
-            logger.info("开始时间: " + StringUtils.getCurrentTime());
+            logger.info(className + "的" + methodName + "方法开始时间: " + StringUtils.getCurrentTime());
             result = ((ProceedingJoinPoint) joinPoint).proceed();
-            Class clazz = joinPoint.getTarget().getClass();
-            String methodName = joinPoint.getSignature().getName();
             Method[] methods = clazz.getMethods();
             for(Method method : methods){
                 if(method.getName().equals(methodName)){
@@ -62,7 +68,7 @@ public class SpringAop {
                     }
                 }
             }
-            logger.info("结束时间: " + StringUtils.getCurrentTime());
+            logger.info(className + "的" + methodName + "方法结束时间: " + StringUtils.getCurrentTime());
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }

@@ -63,6 +63,16 @@ public class StringUtils {
         Date date = new Date();
         return sdf.format(date);
     }
+    public static boolean isNotEmpty(String str){
+        if(str == null || str.equals("") || str.length() == 1){
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isEmpty(String str){
+        return !isNotEmpty(str);
+    }
 
     public static boolean isNotEmpty(Collection e){
         if(e == null || e.size() == 0){
