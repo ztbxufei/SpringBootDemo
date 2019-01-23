@@ -11,9 +11,11 @@ public class DataBaseEntity {
 
     public static String DESC = "desc";
     public static String ASC = "asc";
+    public static String KEY = "id";
 
     public DataBaseEntity(){
         this.orderDesc = ASC;
+        this.primaryKey = KEY;
     }
 
     public String getOrderField() {
