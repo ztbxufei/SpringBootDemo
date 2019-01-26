@@ -28,7 +28,7 @@ public class LoginController extends BaseController {
     public ModelAndView index(HttpServletRequest request){
         ModelAndView mv = returnView(request);
         HttpSession session = request.getSession(true);
-        List<Map<Menu,List<Menu>>> menuList = menuService.getMenuList();
+        List<Menu> menuList = menuService.getMenuList();
         session.setAttribute("menuList", menuList);
         return mv;
     }

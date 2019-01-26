@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <body class="overflow-hidden">
     <div id="wrapper" th:fragment = "common">
         <div id="top-nav" class="fixed skin-6">
@@ -245,19 +244,18 @@
                                 class="fa fa-search"></i></button></span>
                     </div>
                 </div>
-                <div class="main-menu">
+                <div class="main-menu" id="main-menu">
                     <ul th:each="prod:${session.menuList}">
-                        <li th:each="entry:${prod}" th:unless="${#lists.isEmpty(entry.value)}" class="openable open">
+                        <li th:if="${prod.pid eq '0' and prod.menuList.size() gt 0}" class="openable open">
                             <a href="#">
-                                <span class="menu-icon"><i th:class="${entry.key.iconClass}"></i></span>
-                                <span class="text" th:text="${entry.key.name}"></span>
+                                <span class="menu-icon"><i th:class="${prod.iconClass}"></i></span>
+                                <span class="text" th:text="${prod.name}"></span>
                                 <span class="menu-hover"></span>
                             </a>
-                            <ul class="submenu">
-                                <li th:each="menu:${entry.value}">
-                                    <a th:href="${menu.url}" target="menu_iframe"><span class="submenu-label" th:text="${menu.name}"></span></a>
-                                </li>
-                            </ul>
+                            <ul class="submenu" th:include="common/subMenu :: nav_menu(subMenu = ${prod.menuList})"></ul>
+                        </li>
+                        <li th:if="${prod.pid eq '0' and prod.menuList.size() lt 1}">
+                            <a th:href="${prod.url}" target="menu_iframe"><span class="submenu-label" th:text="${prod.name}"></span></a>
                         </li>
                     </ul>
                 </div>

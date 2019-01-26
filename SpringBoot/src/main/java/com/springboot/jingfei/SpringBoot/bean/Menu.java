@@ -1,5 +1,8 @@
 package com.springboot.jingfei.SpringBoot.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Menu {
     private String id;
     private String pid;
@@ -7,6 +10,15 @@ public class Menu {
     private String iconClass;
     private String isParent;
     private String url;
+    private List<Menu> menuList = new ArrayList<>();
+
+    public List<Menu> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<Menu> menuList) {
+        this.menuList = menuList;
+    }
 
     public String getUrl() {
         return url;

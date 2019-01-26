@@ -15,28 +15,20 @@ public class MenuService {
     @Autowired
     private ReportDao reportDao;
 
-    public List<Map<Menu,List<Menu>>> getMenuList(){
+    public List<Menu> getMenuList(){
         List<Menu> menuList = reportDao.getMenuList();
-        List<Map<Menu,List<Menu>>> listMap = new ArrayList<>();
         for(Menu menu : menuList){
-            if("1".equals(menu.getIsParent())){
-                Map<Menu,List<Menu>> map = new HashMap();
-                getListByPid(menu, map, menuList);
-                listMap.add(map);
-            }
+            getListByPid(menu,menuList);
         }
-        return listMap;
+        return menuList;
     }
 
     // 根据主菜单id， 获取主菜单下的所有菜单
-    private void getListByPid(Menu menu, Map<Menu,List<Menu>> map, List<Menu> list){
-        List<Menu> subList = new ArrayList();
+    private void getListByPid(Menu menu, List<Menu> list){
         for(Menu subMenu : list){
             if(subMenu.getPid().equals(menu.getId())){
-                subList.add(subMenu);
+                menu.getMenuList().add(subMenu);
             }
         }
-        // 主菜单为key， 子菜单的集合为value
-        map.put(menu, subList);
     }
 }
