@@ -13,21 +13,23 @@
 </head>
 <script type="text/javascript">
     $(function () {
+        initTable("dataTable", aoColumns);
         // 初始化查询
         searchData();
     });
 
     // 定义表格的列
-    var aoColumns = [
-        {"mDataProp": "id", "bSortable": false},
-        {"mDataProp": "name", "bSortable": false},
-        {"mDataProp": "username", "bSortable": false},
-        {"mDataProp": "worknum", "bSortable": false},
-        {"mDataProp": "email", "bSortable": false} //不允许当前页排序
+    var aoColumns =
+    [
+        {"mDataProp": "id", "title": "Id", "bSortable": false, "isExported": false},
+        {"mDataProp": "name", "title": "姓名", "bSortable": false},
+        {"mDataProp": "username", "title": "用户名", "bSortable": false},
+        {"mDataProp": "worknum", "title": "工号", "bSortable": false},
+        {"mDataProp": "email", "title": "邮箱", "bSortable": false} //不允许当前页排序
     ];
 
     // 查询事件
-    function searchData(){
+    function searchData() {
         var param = $("#formToggleLine").serializeObject();
         clientDataTableInit("dataTable", "codeTable1", param, aoColumns);
     }
@@ -43,16 +45,8 @@
                             <h3>前台分页Table</h3>
                         </div>
                         <div class="padding-md clearfix">
-                            <table class="table table-bordered table-condensed table-hover table-striped" id="dataTable">
-                                <thead>
-                                <tr>
-                                    <th class="col-md-3">Id</th>
-                                    <th>姓名</th>
-                                    <th>用户名</th>
-                                    <th>工号</th>
-                                    <th>电子邮箱</th>
-                                </tr>
-                                </thead>
+                            <table class="table table-bordered table-condensed table-hover table-striped"
+                                   id="dataTable">
                             </table>
                         </div>
                     </div>

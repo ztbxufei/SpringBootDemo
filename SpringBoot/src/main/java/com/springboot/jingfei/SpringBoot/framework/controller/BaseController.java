@@ -3,6 +3,8 @@ package com.springboot.jingfei.SpringBoot.framework.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.springboot.jingfei.SpringBoot.utils.JsonListUtil;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,5 +46,32 @@ public class BaseController {
             map.put(paraName, request.getParameter(paraName));
         }
         return map;
+    }
+
+    /**
+     * 从传递过来的参数里面获取表头信息
+     * @param paramMap
+     * @return
+     */
+    public LinkedHashMap getLinkedHashMap(Map paramMap){
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
+        Object headDataObject = paramMap.get("headData");
+        if(headDataObject != null){
+            String headData = paramMap.get("headData").toString();
+            List<Map> mapList = JsonListUtil.jsonToList(headData, Map.class);
+            for(Map map : mapList){
+                linkedHashMap.put(map.get("name"), map.get("value"));
+            }
+        }
+        return linkedHashMap;
+    }
+
+    public <T> List<T> getEntityList(Map map){
+        Object entityObject = map.get("aaData");
+        List<T> list = new ArrayList<>();
+        if(entityObject != null){
+            list = (List<T>) entityObject;
+        }
+        return list;
     }
 }

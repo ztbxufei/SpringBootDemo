@@ -2,8 +2,10 @@
 // document.write("<script language=javascript src='@{/js/endless/mine.js}’></script>");
 
 var dataTable;
+var aotoDataMap = {};
 function serverDataTableInit(id, url, param, aoColumns) { // param 为json对象
     if(dataTable != undefined){
+        dataTable.fnClearTable(); //清空一下table
         dataTable.fnDestroy();
     }
     dataTable = $('#' + id).dataTable({
@@ -12,18 +14,21 @@ function serverDataTableInit(id, url, param, aoColumns) { // param 为json对象
         "bPaginate": true,
         "bLengthChange": false, //改变每页显示数据数量
         "sPaginationType": "full_numbers",
-        //"aLengthMenu": [10, 25, 30, "All"], // 定义每页显示数据量
         "bServerSide": true,
-        "bRetrieve": true,
+        "bRetrieve": false,
         "bSort":true,
-        "iDisplayLength": 10,
+        "bAutoWidth": false,
+        "sScrollY" : "60vh", //DataTables的高
+        "iDisplayLength": 18,
         "sServerMethod": "POST",
         "sAjaxSource": url,
         "fnServerData": function retrieveData(sSource,aoData,fnCallback) {
             aoData.push({"name":"bServerSide", "value":"true"}); // 表示后端分页
+            getParamByDataTable(id,aoColumns,aoData);
             for(var key in param){
                 aoData.push({"name":key, "value":param[key]});
             }
+            aotoDataMap[id] = aoData;
             $.ajax({
                 url : sSource,//这个就是请求地址对应sAjaxSource
                 data : {"aoData":JSON.stringify(aoData)},//这个是把datatable的一些基本数据传给后台,比如起始位置,每页显示的行数
@@ -79,6 +84,7 @@ function clientDataTableInit(id, url, param, aoColumns){
         "bLengthChange": true, //改变每页显示数据数量
         "sPaginationType": "full_numbers",
         "bServerSide": false,
+        "bAutoWidth": false,
         //"bRetrieve": true,
         //"bSort":true,
         "iDisplayLength": 10,
@@ -86,9 +92,11 @@ function clientDataTableInit(id, url, param, aoColumns){
         "sAjaxSource": url,
         "fnServerData": function retrieveData(sSource,aoData,fnCallback) {
             aoData.push({"name":"bServerSide", "value":"false"});// 表示前端分页
+            getParamByDataTable(id,aoColumns,aoData);
             for(var key in param){
                 aoData.push({"name":key, "value":param[key]});
             }
+            aotoDataMap[id] = aoData;
             $.ajax({
                 url : sSource,//这个就是请求地址对应sAjaxSource
                 data : {"aoData":JSON.stringify(aoData)},//这个是把datatable的一些基本数据传给后台,比如起始位置,每页显示的行数

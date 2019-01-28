@@ -133,6 +133,19 @@
             <version>4.1.6</version>
         </dependency>
 
+        <!--导入03版本的excel-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <!--导入07及以后版本的excel-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>

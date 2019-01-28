@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<ul class="submenu" th:fragment="nav_menu(subMenu)">
+<ul th:fragment="nav_menu(subMenu)">
     <li th:each="menu : ${subMenu}" th:if="${menu.menuList.size() lt 1}">
         <a th:href="${menu.url}" target="menu_iframe"><span class="submenu-label" th:text="${menu.name}"></span></a>
     </li>
@@ -9,14 +9,6 @@
             <span class="text" th:text="${menu.name}"></span>
             <span class="menu-hover"></span>
         </a>
-        <ul class="submenu" th:include="common/subMenu :: nav_menu(subMenu = ${menu.menuList})"></ul>
+        <ul class="submenu third-level" th:include="common/subMenu :: nav_menu(subMenu = ${menu.menuList})"></ul>
     </li>
-    <!--<li th:each="menu : ${subMenu}" th:if="${#lists.size(menu.value) gt 0}">-->
-    <!--<a href="#">-->
-    <!--<span class="menu-icon"><i th:class="${menu.key.iconClass}"></i></span>-->
-    <!--<span class="text" th:text="${menu.key.name}"></span>-->
-    <!--<span class="menu-hover"></span>-->
-    <!--</a>-->
-    <!--<div th:include="common/subMenu :: nav_menu(subMenu = ${menu})"></div>-->
-    <!--</li>-->
 </ul>

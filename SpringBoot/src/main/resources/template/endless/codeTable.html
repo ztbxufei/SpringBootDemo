@@ -15,6 +15,7 @@
     $(function(){
         // 使用cookie存取值，此处是取值 $.cookie("name",$("#name").val()) 存值，来实现客户端记录用户上次的行为
         $("#name").val($.cookie("name"));
+        initTable("dataTable",aoColumns);
         // 初始化查询
         searchData();
     });
@@ -22,11 +23,15 @@
     // 表格对应的列
     var aoColumns =
     [
-        {"mDataProp": "id", "bSortable": false},
-        {"mDataProp": "name", "bSortable": false},
-        {"mDataProp": "username", "bSortable": false},
-        {"mDataProp": "worknum", "bSortable": false},
-        {"mDataProp": "email", "bSortable": false} //不允许当前页排序
+        {"mDataProp": "id", "title":"Id", "bSortable": false, "isExported": false,
+            "mRender": function (data) {
+                return "<a style='color: red' href=" + data + ">" + data + "</a>";
+            }
+        },
+        {"mDataProp": "name","title":"姓名", "bSortable": false},
+        {"mDataProp": "username","title":"用户名", "bSortable": false},
+        {"mDataProp": "worknum","title":"工号", "bSortable": false},
+        {"mDataProp": "email","title":"邮箱", "bSortable": false} //不允许当前页排序
     ];
 
     // 查询事件
@@ -34,6 +39,14 @@
         $.cookie("name",$("#name").val());
         var param = $("#formToggleLine").serializeObject();
         serverDataTableInit("dataTable", "codeTable1", param, aoColumns);
+    }
+    // 导出当前页
+    function Export(){
+        ExportTableDataByPage("dataTable", aoColumns,"exportCodeTableData");
+    }
+    // 导出全部
+    function ExportAll() {
+        ExportTableDataAll("dataTable",aoColumns,"exportCodeTableData");
     }
 </script>
 <body class="overflow-hidden">
@@ -54,18 +67,11 @@
                                 <label>label: </label>
                                 <select class="mineForm-control input-sm" style="width:100px;" name="dataTable_length" aria-controls="dataTable" th:value="${selectList}">
                                 </select>
-                                <button class="btn btn-default btn-sm" data-toggle="tooltip" title="查询" type="button" onclick="searchData()"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-default btn-sm" data-toggle="tooltip" title="查询" type="button" onclick="searchData()">查询<i class="fa fa-search"></i></button>
+                                <button class="btn btn-default btn-sm" data-toggle="tooltip" title="导出当前页" type="button" onclick="Export()">导出当前页<i class="fa fa-download"></i></button>
+                                <button class="btn btn-default btn-sm" data-toggle="tooltip" title="导出全部" type="button" onclick="ExportAll()">导出全部<i class="fa fa-download"></i></button>
                             </form>
                             <table class="table table-bordered table-condensed table-hover table-striped" id="dataTable">
-                                <thead>
-                                    <tr>
-                                        <th class="col-md-3">Id</th>
-                                        <th>姓名</th>
-                                        <th>用户名</th>
-                                        <th>工号</th>
-                                        <th>电子邮箱</th>
-                                    </tr>
-                                </thead>
                             </table>
                         </div>
                     </div>
