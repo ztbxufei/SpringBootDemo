@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ExportExcel {
 
-    private static final int sheetCount = 100000; // 超过100000条就分页
+    private static final int sheetCount = 60000; // 超过100000条就分页
 
     public static <T> HSSFWorkbook export(HttpServletResponse response, String fileName, LinkedHashMap<String, String> excelHeader, List<T> dataList) {
         // 创建一个工作簿

@@ -14,7 +14,7 @@
 <script type="text/javascript">
     $(function(){
         // 使用cookie存取值，此处是取值 $.cookie("name",$("#name").val()) 存值，来实现客户端记录用户上次的行为
-        $("#name").val($.cookie("name"));
+        //$("#name").val($.cookie("name"));
         initTable("dataTable",aoColumns);
         // 初始化查询
         searchData();
@@ -36,7 +36,7 @@
 
     // 查询事件
     function searchData(){
-        $.cookie("name",$("#name").val());
+        //$.cookie("name",$("#name").val());
         var param = $("#formToggleLine").serializeObject();
         serverDataTableInit("dataTable", "codeTable1", param, aoColumns);
     }
