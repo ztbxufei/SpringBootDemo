@@ -87,7 +87,8 @@ function clientDataTableInit(id, url, param, aoColumns){
         "bAutoWidth": false,
         //"bRetrieve": true,
         //"bSort":true,
-        "iDisplayLength": 10,
+        "sScrollY" : "60vh", //DataTables的高
+        "iDisplayLength": 18,
         "sServerMethod": "POST",
         "sAjaxSource": url,
         "fnServerData": function retrieveData(sSource,aoData,fnCallback) {

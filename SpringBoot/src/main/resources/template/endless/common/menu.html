@@ -256,7 +256,10 @@
                             <ul class="submenu" th:include="common/subMenu :: nav_menu(subMenu = ${prod.menuList})"></ul>
                         </li>
                         <li th:if="${prod.pid eq '0' and prod.menuList.size() lt 1}">
-                            <a th:href="${prod.url}" target="menu_iframe"><span class="submenu-label" th:text="${prod.name}"></span></a>
+                            <a th:href="${prod.url}" target="menu_iframe">
+                                <span class="menu-icon"><i th:class="${prod.iconClass}"></i></span>
+                                <span class="text" th:text="${prod.name}"></span>
+                            </a>
                         </li>
                     </ul>
                 </div>

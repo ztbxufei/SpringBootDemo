@@ -48,10 +48,12 @@ function getParamByDataTable(tableId, columns, param){
 }
 
 function initTable(tableId, aoColumns){
-    var thead = "<thead><tr>";
+    document.getElementById(tableId).setAttribute("height","60vh");
+    var table = "<thead><tr>";
+    var thead = "";
     for(var index = 0; index < aoColumns.length; index++){
-        thead = thead + "<td>" + aoColumns[index].title + "</td>";
+        thead = thead + "<td style='font-size: 15px;text-align: center;font-weight: bold'>" + aoColumns[index].title + "</td>";
     }
-    thead = thead + "</tr></thead>";
-    $("#" + tableId).append(thead);
+    table = table + thead + "</tr></thead>";
+    $("#" + tableId).append(table);
 }

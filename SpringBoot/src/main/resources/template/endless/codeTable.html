@@ -65,13 +65,12 @@
                                 <input type="text" class="mineForm-control input-sm" placeholder="工号" id="worknum" name="worknum" aria-controls="dataTable">
                                 <input type="text" class="mineForm-control input-sm" placeholder="邮箱" id="email" name="email" aria-controls="dataTable">
                                 <label>label: </label>
-                                <select class="mineForm-control input-sm" style="width:100px;" name="dataTable_length" aria-controls="dataTable" th:value="${selectList}">
-                                </select>
+                                <select class="mineForm-control input-sm" style="width:100px;" name="dataTable_length" aria-controls="dataTable" th:value="${selectList}"></select>
                                 <button class="btn btn-default btn-sm" data-toggle="tooltip" title="查询" type="button" onclick="searchData()">查询<i class="fa fa-search"></i></button>
                                 <button class="btn btn-default btn-sm" data-toggle="tooltip" title="导出当前页" type="button" onclick="Export()">导出当前页<i class="fa fa-download"></i></button>
                                 <button class="btn btn-default btn-sm" data-toggle="tooltip" title="导出全部" type="button" onclick="ExportAll()">导出全部<i class="fa fa-download"></i></button>
                             </form>
-                            <table class="table table-bordered table-condensed table-hover table-striped" id="dataTable">
+                            <table class="table table-bordered table-condensed table-hover table-striped" id="dataTable" style="text-align: center">
                             </table>
                         </div>
                     </div>
