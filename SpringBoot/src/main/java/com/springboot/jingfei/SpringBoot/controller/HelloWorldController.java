@@ -107,8 +107,8 @@ public class HelloWorldController extends BaseController {
     public ModelAndView codeTable(HttpServletRequest request){
         ModelAndView modelAndView = returnView(request);
         try {
-            List<Select> selectList = userService.getSelectCodeList();
-            modelAndView.addObject("selectList", JSON.toJSONString(selectList));
+//            List<Select> selectList = userService.getSelectCodeList();
+//            modelAndView.addObject("selectList", JSON.toJSONString(selectList));
         } catch (Exception e){
             logger.error("后台分页失败: " + e.getMessage());
         }

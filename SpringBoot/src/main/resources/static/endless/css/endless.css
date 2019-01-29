@@ -721,7 +721,7 @@ aside .main-menu .alert {
 #wrapper {
   position: relative;
   overflow: hidden;
-  min-height: 800px;
+  height: 100%;
   background-color: #f9f9f9;
 }
 @media (min-width: 768px) {
@@ -1298,7 +1298,7 @@ a.list-group-item {
 }
 #main-container {
   position: relative;
-  min-height: 800px;
+  min-height: 100%;
   padding-top: 45px;
   margin-left: 194px;
 }
