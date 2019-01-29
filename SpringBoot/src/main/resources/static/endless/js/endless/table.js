@@ -18,8 +18,8 @@ function serverDataTableInit(id, url, param, aoColumns) { // param 为json对象
         "bRetrieve": false,
         "bSort":true,
         "bAutoWidth": false,
-        "sScrollY" : "45vh", //DataTables的高
-        "iDisplayLength": 15,
+        "sScrollY" : "60vh", //DataTables的高
+        "iDisplayLength": 18,
         "sServerMethod": "POST",
         "sAjaxSource": url,
         "fnServerData": function retrieveData(sSource,aoData,fnCallback) {
