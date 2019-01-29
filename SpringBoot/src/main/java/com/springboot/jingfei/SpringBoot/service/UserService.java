@@ -6,11 +6,13 @@ import com.springboot.jingfei.SpringBoot.dao.UserDao;
 import com.springboot.jingfei.SpringBoot.framework.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
 
 @Component
+@Transactional
 public class UserService extends BaseService {
     @Autowired
     private UserDao userDao;

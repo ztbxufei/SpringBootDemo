@@ -5,6 +5,7 @@ import com.springboot.jingfei.SpringBoot.dao.DataBaseDao;
 import com.springboot.jingfei.SpringBoot.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Transactional
 public class DataBaseService {
 
     @Autowired

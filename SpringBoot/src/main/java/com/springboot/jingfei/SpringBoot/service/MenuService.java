@@ -4,13 +4,12 @@ import com.springboot.jingfei.SpringBoot.bean.Menu;
 import com.springboot.jingfei.SpringBoot.dao.ReportDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Component
+@Transactional
 public class MenuService {
     @Autowired
     private ReportDao reportDao;

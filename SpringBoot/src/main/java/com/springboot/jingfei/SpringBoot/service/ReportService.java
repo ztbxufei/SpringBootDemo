@@ -10,6 +10,7 @@ import com.springboot.jingfei.SpringBoot.constant.Constant;
 import com.springboot.jingfei.SpringBoot.dao.ReportDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
 import javax.xml.bind.JAXBContext;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Transactional
 public class ReportService {
 
     private static String type = "";
