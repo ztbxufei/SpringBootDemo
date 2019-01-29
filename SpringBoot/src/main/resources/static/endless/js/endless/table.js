@@ -36,6 +36,9 @@ function serverDataTableInit(id, url, param, aoColumns) { // param 为json对象
                 dataType : 'json',
                 async : false,
                 success : function(result) {
+                    if(result.aaData.length == 1){
+                        $("#"+id).attr("height","28vh");
+                    }
                     fnCallback(result);//把返回的数据传给这个方法就可以了,datatable会自动绑定数据的
                 },
                 error : function(msg) {
