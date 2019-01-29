@@ -45,7 +45,7 @@ function serverDataTableInit(id, url, param, aoColumns) { // param 为json对象
         "aoColumns":aoColumns,
         "destroy": true,
         "oLanguage":{
-            "sProcessing": "<img th:src='/img/loading.gif'>  努力加载数据中.",
+            "sProcessing": "<img th:src='@{/img/loading.gif}'>  努力加载数据中...",
             "sLengthMenu": "每页显示 _MENU_ 条记录",
             "sZeroRecords": "抱歉， 没有找到",
             "sInfo": "从 _START_ 到 _END_ /共 _MAX_ 条数据",
@@ -114,7 +114,7 @@ function clientDataTableInit(id, url, param, aoColumns){
         "aoColumns":aoColumns,
         "destroy": true,
         "oLanguage":{
-            "sProcessing": "<img th:src='/img/loading.gif'>  努力加载数据中.",
+            "sProcessing": "<img th:src='/img/user.jpg'>  努力加载数据中...",
             "sLengthMenu": "每页显示 _MENU_ 条记录",
             "sZeroRecords": "抱歉， 没有找到",
             "sInfo": "从 _START_ 到 _END_ /共 _MAX_ 条数据",

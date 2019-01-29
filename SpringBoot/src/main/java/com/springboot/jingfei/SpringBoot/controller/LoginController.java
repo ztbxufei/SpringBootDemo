@@ -31,11 +31,7 @@ public class LoginController extends BaseController {
     }
 
     @RequestMapping("/index")
-    public ModelAndView index(HttpServletRequest request) throws IllegalAccessException {
-        User user = new User();
-        user.setName("八戒");
-        DataBaseEntity dataBaseEntity = DataBaseEntity.builder().setTableName("sys_user").setPrimaryKey("worknum").setPrimaryValue("1010").create(user);
-        dataBaseService.updateField(dataBaseEntity);
+    public ModelAndView index(HttpServletRequest request){
         ModelAndView mv = returnView(request);
         HttpSession session = request.getSession(true);
         List<Menu> menuList = menuService.getMenuList();

@@ -122,6 +122,8 @@ $(function	()	{
 		$('#wrapper').toggleClass('sidebar-mini');
 		$('.main-menu').find('.openable').removeClass('open');
 		$('.main-menu').find('.submenu').removeAttr('style');
+        var _iframe1=window.parent.document.getElementById('menu_iframe');
+        _iframe1.contentWindow.location.reload(true);
 	});
 	
 	if(!$('#wrapper').hasClass('sidebar-mini'))	{ 
