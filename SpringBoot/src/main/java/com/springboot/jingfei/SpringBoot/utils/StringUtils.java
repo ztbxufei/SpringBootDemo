@@ -20,7 +20,7 @@ public class StringUtils {
         try {
             for (Field field : fields) {
                 field.setAccessible(true);
-                resultMap.put(field.getName(), field.get(object));
+                resultMap.put(field.getName().toLowerCase(), field.get(object));
             }
         } catch(Exception e){
             e.printStackTrace();

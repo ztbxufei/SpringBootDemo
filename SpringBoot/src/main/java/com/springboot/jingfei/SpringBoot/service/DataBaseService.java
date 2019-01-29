@@ -6,6 +6,7 @@ import com.springboot.jingfei.SpringBoot.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,10 +75,48 @@ public class DataBaseService {
      * @return
      */
     public <T> T select(DataBaseEntity dataBaseEntity, Class<T> clazz) {
-        List<T> objectList = selectList(dataBaseEntity, clazz);
-        if (!StringUtils.isEmpty(objectList)) {
-            return objectList.get(0);
+        Map dbEntityMap = new HashMap();
+        dbEntityMap.put("primaryKey", dataBaseEntity.getPrimaryKey());
+        dbEntityMap.put("primaryValue", dataBaseEntity.getPrimaryValue());
+        dbEntityMap.put("tableName", dataBaseEntity.getTableName());
+        Map objectMap = dataBaseDao.select(dbEntityMap);
+        return (T) StringUtils.convertMapToObj(objectMap, clazz);
+    }
+
+    /**
+     * 更新指定字段
+     * @param dataBaseEntity
+     */
+    public void updateField(DataBaseEntity dataBaseEntity) throws IllegalAccessException {
+        Object oldObject = select(dataBaseEntity, dataBaseEntity.getEntity().getClass());
+        Object newObject = dataBaseEntity.getEntity();
+        assignBeanAttrPara(oldObject.getClass(),newObject,oldObject);
+        dataBaseEntity.setEntity(oldObject);
+        // 先删除后增加
+        updateObject(dataBaseEntity);
+    }
+
+    public void assignBeanAttrPara(Class cls, Object from, Object to) throws IllegalAccessException {
+        {
+            Field[] fields = cls.getDeclaredFields();
+            for (Field field : fields)
+            {
+                field.setAccessible(true);
+                Object val = field.get(from);
+                if (val != null) {
+                    field.set(to, val);
+                }
+            }
         }
-        return null;
+    }
+
+    /**
+     * 更新整个对象
+     * @param dataBaseEntity
+     */
+    public void updateObject(DataBaseEntity dataBaseEntity) {
+        // 先删除后插入
+        delete(dataBaseEntity);
+        insert(dataBaseEntity);
     }
 }

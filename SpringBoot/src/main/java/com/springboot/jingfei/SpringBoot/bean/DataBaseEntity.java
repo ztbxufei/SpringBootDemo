@@ -43,7 +43,7 @@ public class DataBaseEntity {
     }
 
     public String getPrimaryKey() {
-        return primaryKey;
+        return primaryKey.toLowerCase();
     }
 
     public void setPrimaryKey(String primaryKey) {
@@ -98,6 +98,11 @@ public class DataBaseEntity {
         public DataBaseBuilder setPrimaryValue(Object primaryValue) {
             entity.setPrimaryValue(primaryValue);
             return this;
+        }
+
+        public DataBaseEntity create(Object object){
+            setEntity(object);
+            return entity;
         }
 
         public DataBaseEntity create(){

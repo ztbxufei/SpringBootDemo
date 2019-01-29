@@ -28,4 +28,18 @@
             order by ${orderField} ${orderDesc}
         </if>
     </select>
+
+    <select id="select" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from ${tableName} where ${primaryKey} = #{primaryValue}
+    </select>
+
+    <update id="update" parameterType="java.util.Map">
+        update ${tableName} set
+        <foreach collection="database" index="key" item="val" separator=",">
+            <if test=" key != 'null' ">
+                ${key}=#{val}
+            </if>
+        </foreach>
+        where ${primaryKey} = #{primaryValue}
+    </update>
 </mapper>

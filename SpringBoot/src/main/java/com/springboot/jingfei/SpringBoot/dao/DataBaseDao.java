@@ -11,5 +11,9 @@ public interface DataBaseDao {
 
     List<Map> selectList(Map map);
 
+    Map select(Map map);
+
     int delete(Map map);
+
+    int update(Map map);
 }

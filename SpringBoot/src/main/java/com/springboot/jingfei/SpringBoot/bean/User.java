@@ -2,17 +2,17 @@ package com.springboot.jingfei.SpringBoot.bean;
 
 public class User {
 
-    private int id;
+    private String id;
     private String name;
     private String username;
     private String worknum;
     private String email;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
