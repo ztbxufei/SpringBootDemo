@@ -92,22 +92,26 @@ public class DataBaseService {
     public void updateField(DataBaseEntity dataBaseEntity) throws IllegalAccessException {
         Object oldObject = select(dataBaseEntity, dataBaseEntity.getEntity().getClass());
         Object newObject = dataBaseEntity.getEntity();
-        assignBeanAttrPara(oldObject.getClass(),newObject,oldObject);
+        copyBeanFiledValue(oldObject.getClass(),newObject,oldObject);
         dataBaseEntity.setEntity(oldObject);
         // 先删除后增加
         updateObject(dataBaseEntity);
     }
 
-    public void assignBeanAttrPara(Class cls, Object from, Object to) throws IllegalAccessException {
-        {
-            Field[] fields = cls.getDeclaredFields();
-            for (Field field : fields)
-            {
-                field.setAccessible(true);
-                Object val = field.get(from);
-                if (val != null) {
-                    field.set(to, val);
-                }
+    /**
+     * 将from对象的字段属性  赋值给to
+     * @param cls
+     * @param from
+     * @param to
+     * @throws IllegalAccessException
+     */
+    public void copyBeanFiledValue(Class cls, Object from, Object to) throws IllegalAccessException {
+        Field[] fields = cls.getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            Object val = field.get(from);
+            if (val != null) {
+                field.set(to, val);
             }
         }
     }
