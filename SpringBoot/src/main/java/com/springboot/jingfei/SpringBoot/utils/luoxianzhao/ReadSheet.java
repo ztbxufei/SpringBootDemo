@@ -216,9 +216,9 @@ public class ReadSheet {
         return titleStyle;
     }
 
-    public static void main(String[] args) throws IOException {
-        Map resultMap = new HashMap();
-        readSheet(resultMap, "D:/Desktop/oracle.xlsx");
-        writeSheet(resultMap, "D:/Desktop/oracleWrite.xlsx");
-    }
+//    public static void main(String[] args) throws IOException {
+//        Map resultMap = new HashMap();
+//        readSheet(resultMap, "D:/Desktop/oracle.xlsx");
+//        writeSheet(resultMap, "D:/Desktop/oracleWrite.xlsx");
+//    }
 }

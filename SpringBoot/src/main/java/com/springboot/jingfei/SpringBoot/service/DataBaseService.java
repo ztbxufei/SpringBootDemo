@@ -26,10 +26,7 @@ public class DataBaseService {
      * @param dataBaseEntity
      */
     public void insert(DataBaseEntity dataBaseEntity) {
-        Map dbEntityMap = new HashMap();
-        dbEntityMap.put("tableName", dataBaseEntity.getTableName());
-        dbEntityMap.put("database", StringUtils.convertObjToMap(dataBaseEntity.getEntity()));
-
+        Map dbEntityMap = StringUtils.convertObjToMap(dataBaseEntity);
         dataBaseDao.insert(dbEntityMap);
     }
 
@@ -40,11 +37,7 @@ public class DataBaseService {
      * @return
      */
     public int delete(DataBaseEntity dataBaseEntity) {
-        Map dbEntityMap = new HashMap();
-        dbEntityMap.put("primaryKey", dataBaseEntity.getPrimaryKey());
-        dbEntityMap.put("primaryValue", dataBaseEntity.getPrimaryValue());
-        dbEntityMap.put("tableName", dataBaseEntity.getTableName());
-
+        Map dbEntityMap = StringUtils.convertObjToMap(dataBaseEntity);
         return dataBaseDao.delete(dbEntityMap);
     }
 
@@ -55,13 +48,7 @@ public class DataBaseService {
      * @return
      */
     public List selectList(DataBaseEntity dataBaseEntity, Class clazz) {
-        Map dbEntityMap = new HashMap();
-        dbEntityMap.put("primaryKey", dataBaseEntity.getPrimaryKey());
-        dbEntityMap.put("primaryValue", dataBaseEntity.getPrimaryValue());
-        dbEntityMap.put("tableName", dataBaseEntity.getTableName());
-        dbEntityMap.put("orderField", dataBaseEntity.getOrderField());
-        dbEntityMap.put("orderDesc", dataBaseEntity.isOrderDesc());
-
+        Map dbEntityMap = StringUtils.convertObjToMap(dataBaseEntity);
         List<Map> objectMapList = dataBaseDao.selectList(dbEntityMap);
         List<Object> objectList = new ArrayList<>();
         for (Map objectMap : objectMapList) {
@@ -77,10 +64,7 @@ public class DataBaseService {
      * @return
      */
     public <T> T select(DataBaseEntity dataBaseEntity, Class<T> clazz) {
-        Map dbEntityMap = new HashMap();
-        dbEntityMap.put("primaryKey", dataBaseEntity.getPrimaryKey());
-        dbEntityMap.put("primaryValue", dataBaseEntity.getPrimaryValue());
-        dbEntityMap.put("tableName", dataBaseEntity.getTableName());
+        Map dbEntityMap = StringUtils.convertObjToMap(dataBaseEntity);
         Map objectMap = dataBaseDao.select(dbEntityMap);
         return (T) StringUtils.convertMapToObj(objectMap, clazz);
     }

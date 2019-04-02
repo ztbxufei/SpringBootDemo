@@ -1,0 +1,68 @@
+server:
+  port: 8081
+
+# spring 配置
+spring:
+  # 配置activemq
+  activemq:
+    broker-url: tcp://127.0.0.1:61616
+    user: admin
+    password: admin
+    in-memory: true
+  thymeleaf:
+    # 配置前缀
+    prefix: classpath:template/endless/
+    # 配置后缀
+    suffix: .html
+    # 配置清除缓存
+    cache: false
+    # 检查模板是否存在，然后再呈现
+    check-template-location: true
+    # 配置编码格式
+    encoding: utf-8
+    # Content-Type值
+    servlet:
+      content-type: text/html
+    # 启用MVC Thymeleaf视图分辨率
+    enabled: true
+    # 配置模板编码
+    mode: LEGACYHTML5
+  # spring boot的静态资源路径
+  resources:
+    static-locations: classpath:static/endless/
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/mysql
+    username: root
+    password: 123456
+    # 验证连接的有效性
+    testWhileIdle: true
+    # 获取连接时候验证，会影响性能
+    testOnBorrow: false
+    # 在连接归还到连接池时是否测试该连接
+    testOnReturn: false
+    validationQuery: SELECT 1 FROM DUAL
+    # 空闲连接回收的时间间隔，与testWhileIdle一起使用，设置5分钟
+    timeBetweenEvictionRunsMillis: 300000
+    # 连接池空闲连接的有效时间 ，设置30分钟
+    minEvictableIdleTimeMillis: 1800000
+    # 初始化连接池大小
+    initialSize: 5
+    # 指定连接池中最大的活跃连接数.
+    maxActive: 50
+    # 指定连接池等待连接返回的最大等待时间，毫秒单位.
+    maxWait: 60000
+    # 指定必须保持连接的最小值
+    minIdle: 5
+
+# 配置mybatis
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  configLocation: classpath:mybatisConfig/MyBatisConfig.xml
+
+logging:
+  config: classpath:log.xml
+
+
+
+

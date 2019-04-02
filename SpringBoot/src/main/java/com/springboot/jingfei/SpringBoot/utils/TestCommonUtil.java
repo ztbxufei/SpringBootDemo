@@ -41,7 +41,7 @@ public class TestCommonUtil {
         return dummyHead.next;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         ListNode l1 = new ListNode(2);
         ListNode l = l1;
         l.next = new ListNode(5);
@@ -63,5 +63,5 @@ public class TestCommonUtil {
         }
         System.out.println(new StringBuilder(str).reverse().toString());
 
-    }
+    }*/
 }
